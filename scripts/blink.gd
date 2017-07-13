@@ -12,7 +12,6 @@ func _ready():
 	
 func _process(delta):
 	blink += delta
-	print(blink)
 	if (blink > BLINK_INTERVAL):
 		self.hide()
 		if (blink > BLINK_CYCLE):
