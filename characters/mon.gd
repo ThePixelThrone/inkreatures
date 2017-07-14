@@ -12,7 +12,7 @@ const GRAVITY = 1115.0 # Pixels/second
 # Angle in degrees towards either side that the player can consider "floor"
 const FLOOR_ANGLE_TOLERANCE = 40
 # Any angle from 180 to 180-threshold will kill the player
-const KILL_ANGLE_THRESHOLD = 40
+const KILL_ANGLE_THRESHOLD = 44
 const WALK_FORCE = 800
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 200
@@ -45,12 +45,14 @@ var facing_left = false
 var wall_jump = true
 
 var player = "p1"
+var color = "azul"
 var isAlive = true
+
+var splash_scene = null # Used to draw ink spatters
 
 func _fixed_process(delta):
 	# Create forces
 	var force = Vector2(0, GRAVITY)
-	
 	var walk_left = Input.is_action_pressed(player+"_left")
 	var walk_right = Input.is_action_pressed(player+"_right")
 	var jump = Input.is_action_pressed(player+"_jump")
@@ -126,7 +128,7 @@ func _fixed_process(delta):
 				elif (angle < KILL_ANGLE_THRESHOLD):
 					get_collider().die()
 		elif (get_collider().is_in_group("dynamic")):
-			if (isAlive and smashing):
+			if (isAlive):
 				get_collider().interact(self)
 		
 		if (angle < FLOOR_ANGLE_TOLERANCE):
@@ -169,6 +171,7 @@ func _fixed_process(delta):
 				grounded = true # Prende no chão por 0.2 seg
 				grounded_timer = 0.2
 				velocity.x = 0
+				get_node("Trail").set_emitting(false)
 				smashing = false
 			if (not grounded):
 				velocity.y = -BOUNCE_SPEED
@@ -213,7 +216,12 @@ func _fixed_process(delta):
 func die():
 	get_node("AnimationPlayer").play("Die")
 	isAlive = false
+	var splash = splash_scene.instance()
+	splash.set_pos(get_pos())
+	splash.setup(color)
+	get_parent().add_child(splash)
 
 func _ready():
 	self.add_to_group("players", true)
+	splash_scene = load("res://scenes/Splash.tscn")
 	set_fixed_process(true)
