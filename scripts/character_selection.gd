@@ -11,6 +11,7 @@ func _ready():
 
 func _input(event):
 	# <<Player 1 input handling>>
+	event.type
 	if (event.is_action_pressed("p1_up")):
 		pass
 	elif (event.is_action_pressed("p1_down")):
