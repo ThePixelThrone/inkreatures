@@ -1,25 +1,36 @@
 extends Control
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 const PLAY = 0
 const OPTIONS = 1
 const QUIT = 2
-var selected_option = 0
+const SELECTION_COUNT = 3
 
+var selected_option = 0
+var cursor_margin = 15
+var cursor_offset
 
 func _ready():
 	set_process_input(true)
+	cursor_offset = Vector2(get_node("cursor").get_size().x + cursor_margin,0)
+	get_node("cursor").set_pos(Vector2(get_node("VBoxContainer/container/play").get_global_pos() - cursor_offset))
 
 func _input(event):
 	if (event.is_action_pressed("ui_up")):
-		selected_option = (selected_option+2)%3
+		selected_option = (selected_option - 1 + SELECTION_COUNT) % SELECTION_COUNT
 	elif (event.is_action_pressed("ui_down")):
-		selected_option = (selected_option+1)%3
+		selected_option = (selected_option + 1) % SELECTION_COUNT
 	elif (event.is_action_pressed("ui_accept")):
 		select(selected_option)
-	get_node("selected").set_pos(Vector2(304 , 304+(selected_option*32)))
+	update_cursor(selected_option)
+	
+func update_cursor(opt):
+	if (opt == PLAY):
+		get_node("cursor").set_pos(Vector2(get_node("VBoxContainer/container/play").get_global_pos() - cursor_offset))
+	elif (opt == OPTIONS):
+		get_node("cursor").set_pos(Vector2(get_node("VBoxContainer/container/options").get_global_pos() - cursor_offset))
+	elif (opt == QUIT):
+		get_node("cursor").set_pos(Vector2(get_node("VBoxContainer/container/quit").get_global_pos() - cursor_offset))
+
 	
 func select(opt):
 	if (opt == PLAY):
