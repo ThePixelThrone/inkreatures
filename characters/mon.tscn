@@ -12,12 +12,12 @@
 custom_solver_bias = 0.0
 radius = 14.8666
 
-[sub_resource type="ColorRamp" id=8]
+[sub_resource type="ColorRamp" id=2]
 
 offsets = FloatArray( 0, 1 )
-colors = ColorArray( 1, 1, 1, 0.659569, 1, 1, 1, 0 )
+colors = ColorArray( 1, 1, 1, 0.178745, 1, 1, 1, 0 )
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=3]
 
 length = 1.0
 loop = false
@@ -43,7 +43,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=4]
 
 length = 0.45
 loop = true
@@ -59,7 +59,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=5]
 
 length = 0.21
 loop = false
@@ -75,7 +75,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=6]
 
 length = 0.21
 loop = false
@@ -130,8 +130,8 @@ script/script = ExtResource( 1 )
 
 [node name="Trail" type="Particles2D" parent="."]
 
-config/amount = 12
-config/lifetime = 0.3
+config/amount = 140
+config/lifetime = 0.1
 config/emitting = false
 config/process_mode = 1
 config/local_space = false
@@ -152,7 +152,7 @@ params/final_size = 1.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-color/color_ramp = SubResource( 8 )
+color/color_ramp = SubResource( 2 )
 script/script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -165,10 +165,10 @@ hframes = 13
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Die = SubResource( 9 )
-anims/Down = SubResource( 10 )
-anims/Ground = SubResource( 11 )
-anims/Smash = SubResource( 12 )
+anims/Die = SubResource( 3 )
+anims/Down = SubResource( 4 )
+anims/Ground = SubResource( 5 )
+anims/Smash = SubResource( 6 )
 anims/Up = SubResource( 7 )
 playback/active = true
 playback/speed = 1.0

@@ -21,4 +21,4 @@ func _ready():
 	var tex = load("res://assets/images/splash"+var2str(i)+".png")
 	tex.set_flags(0)
 	get_node("Splash").set_texture(tex)
-	pass
+	get_node("AnimationPlayer").play("Spread")
