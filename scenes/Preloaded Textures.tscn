@@ -1,0 +1,150 @@
+[gd_scene load_steps=25 format=1]
+
+[ext_resource path="res://assets/images/m_01_amarelo.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/m_02_amarelo.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/m_03_amarelo.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/m_04_amarelo.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/m_05_amarelo.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/m_01_azul.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/m_02_azul.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/m_03_azul.png" type="Texture" id=8]
+[ext_resource path="res://assets/images/m_04_azul.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/m_05_azul.png" type="Texture" id=10]
+[ext_resource path="res://assets/images/m_01_verde.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/m_02_verde.png" type="Texture" id=12]
+[ext_resource path="res://assets/images/m_03_verde.png" type="Texture" id=13]
+[ext_resource path="res://assets/images/m_04_verde.png" type="Texture" id=14]
+[ext_resource path="res://assets/images/m_05_verde.png" type="Texture" id=15]
+[ext_resource path="res://assets/images/m_01_vermelho.png" type="Texture" id=16]
+[ext_resource path="res://assets/images/m_02_vermelho.png" type="Texture" id=17]
+[ext_resource path="res://assets/images/m_03_vermelho.png" type="Texture" id=18]
+[ext_resource path="res://assets/images/m_04_vermelho.png" type="Texture" id=19]
+[ext_resource path="res://assets/images/m_05_vermelho.png" type="Texture" id=20]
+[ext_resource path="res://assets/images/rastro_amarelo.png" type="Texture" id=21]
+[ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=22]
+[ext_resource path="res://assets/images/rastro_verde.png" type="Texture" id=23]
+[ext_resource path="res://assets/images/rastro_vermelho.png" type="Texture" id=24]
+
+[node name="Preloaded" type="Node2D"]
+
+[node name="amarelo1" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+hframes = 13
+
+[node name="amarelo2" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+hframes = 13
+
+[node name="amarelo3" type="Sprite" parent="."]
+
+texture = ExtResource( 3 )
+hframes = 13
+
+[node name="amarelo4" type="Sprite" parent="."]
+
+texture = ExtResource( 4 )
+hframes = 13
+
+[node name="amarelo5" type="Sprite" parent="."]
+
+texture = ExtResource( 5 )
+hframes = 13
+
+[node name="azul1" type="Sprite" parent="."]
+
+texture = ExtResource( 6 )
+hframes = 13
+
+[node name="azul2" type="Sprite" parent="."]
+
+texture = ExtResource( 7 )
+hframes = 13
+
+[node name="azul3" type="Sprite" parent="."]
+
+texture = ExtResource( 8 )
+hframes = 13
+
+[node name="azul4" type="Sprite" parent="."]
+
+texture = ExtResource( 9 )
+hframes = 13
+
+[node name="azul5" type="Sprite" parent="."]
+
+texture = ExtResource( 10 )
+hframes = 13
+
+[node name="verde1" type="Sprite" parent="."]
+
+texture = ExtResource( 11 )
+hframes = 13
+
+[node name="verde2" type="Sprite" parent="."]
+
+texture = ExtResource( 12 )
+hframes = 13
+
+[node name="verde3" type="Sprite" parent="."]
+
+texture = ExtResource( 13 )
+hframes = 13
+
+[node name="verde4" type="Sprite" parent="."]
+
+texture = ExtResource( 14 )
+hframes = 13
+
+[node name="verde5" type="Sprite" parent="."]
+
+texture = ExtResource( 15 )
+hframes = 13
+
+[node name="vermelho1" type="Sprite" parent="."]
+
+texture = ExtResource( 16 )
+hframes = 13
+
+[node name="vermelho2" type="Sprite" parent="."]
+
+texture = ExtResource( 17 )
+hframes = 13
+
+[node name="vermelho3" type="Sprite" parent="."]
+
+texture = ExtResource( 18 )
+hframes = 13
+
+[node name="vermelho4" type="Sprite" parent="."]
+
+texture = ExtResource( 19 )
+hframes = 13
+
+[node name="vermelho5" type="Sprite" parent="."]
+
+texture = ExtResource( 20 )
+hframes = 13
+
+[node name="rastroamarelo" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 21 )
+
+[node name="rastroazul" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 22 )
+
+[node name="rastroverde" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 23 )
+
+[node name="rastrovermelho" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 24 )
+
+
