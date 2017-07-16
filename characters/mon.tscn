@@ -15,7 +15,7 @@ radius = 14.8666
 [sub_resource type="ColorRamp" id=2]
 
 offsets = FloatArray( 0, 1 )
-colors = ColorArray( 1, 1, 1, 0.178745, 1, 1, 1, 0 )
+colors = ColorArray( 1, 1, 1, 0.306392, 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=3]
 
@@ -130,8 +130,8 @@ script/script = ExtResource( 1 )
 
 [node name="Trail" type="Particles2D" parent="."]
 
-config/amount = 140
-config/lifetime = 0.1
+config/amount = 30
+config/lifetime = 0.2
 config/emitting = false
 config/process_mode = 1
 config/local_space = false
