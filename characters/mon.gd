@@ -44,20 +44,22 @@ var anim_state = 0
 var facing_left = false
 var wall_jump = true
 
-var player = "p1"
+var player = 1
 var color = "azul"
 var isAlive = true
 
 var splash_scene = null # Used to draw ink spatters
 
+signal kill
+
 func _fixed_process(delta):
 	# Create forces
 	var force = Vector2(0, GRAVITY)
-	var walk_left = Input.is_action_pressed(player+"_left")
-	var walk_right = Input.is_action_pressed(player+"_right")
-	var jump = Input.is_action_pressed(player+"_jump")
-	var smash = Input.is_action_pressed(player+"_smash")
-	var powerup = Input.is_action_pressed(player+"_powerup")
+	var walk_left = Input.is_action_pressed("p"+var2str(player)+"_left")
+	var walk_right = Input.is_action_pressed("p"+var2str(player)+"_right")
+	var jump = Input.is_action_pressed("p"+var2str(player)+"_jump")
+	var smash = Input.is_action_pressed("p"+var2str(player)+"_smash")
+	var powerup = Input.is_action_pressed("p"+var2str(player)+"_powerup")
 	
 	var stop = true
 	
@@ -125,8 +127,10 @@ func _fixed_process(delta):
 			if (isAlive and get_collider().isAlive):
 				if (angle > 180-KILL_ANGLE_THRESHOLD):
 					die()
+					emit_signal("kill", get_collider().player)
 				elif (angle < KILL_ANGLE_THRESHOLD):
 					get_collider().die()
+					emit_signal("kill", player)
 		elif (get_collider().is_in_group("dynamic")):
 			if (isAlive):
 				get_collider().interact(self)
