@@ -7,23 +7,22 @@ extends KinematicBody2D
 # as long as it starts from a non-colliding spot too.
 
 # Member variables
-const GRAVITY = 1115.0 # Pixels/second
+const GRAVITY = 1365.0 # Pixels/second
 
 # Angle in degrees towards either side that the player can consider "floor"
 const FLOOR_ANGLE_TOLERANCE = 40
-# Any angle from 180 to 180-threshold will kill the player
-const KILL_ANGLE_THRESHOLD = 44
+# Angle that will kill a player upon contact
+const KILL_ANGLE_THRESHOLD = 46
 const WALK_FORCE = 800
 const WALK_MIN_SPEED = 10
-const WALK_MAX_SPEED = 200
+const WALK_MAX_SPEED = 210
 const SMASH_BONUS_WALK_FORCE = 1000
 const STOP_FORCE = 1200
-const JUMP_SPEED = 535
-const BOUNCE_SPEED = 265
+const JUMP_SPEED = 595
+const BOUNCE_SPEED = 295
 const SMASH_SPEED = 900
 const WALL_JUMP_THRESHOLD = 0.17
 const DEATH_ANIMATION_TIME = 1
-const JUMP_MAX_AIRBORNE_TIME = 0.2 # UNUSED
 
 const SLIDE_STOP_VELOCITY = 1.0 # One pixel per second
 const SLIDE_STOP_MIN_TRAVEL = 1.0 # One pixel
@@ -48,18 +47,25 @@ var player = 1
 var color = "azul"
 var isAlive = true
 
+var time_flow = 1 # Gambiarra pra pepper TODO : fazer direito
+
+var powerup = null # Powerup being held
 var splash_scene = null # Used to draw ink spatters
 
-signal kill
+signal kill # Signal emitted when killing another player
+signal smashing # Signal emitted when smashing
+signal surface_collision
 
 func _fixed_process(delta):
+	delta *= time_flow
+	
 	# Create forces
 	var force = Vector2(0, GRAVITY)
 	var walk_left = Input.is_action_pressed("p"+var2str(player)+"_left")
 	var walk_right = Input.is_action_pressed("p"+var2str(player)+"_right")
 	var jump = Input.is_action_pressed("p"+var2str(player)+"_jump")
 	var smash = Input.is_action_pressed("p"+var2str(player)+"_smash")
-	var powerup = Input.is_action_pressed("p"+var2str(player)+"_powerup")
+	var activate_powerup = Input.is_action_pressed("p"+var2str(player)+"_powerup")
 	
 	var stop = true
 	
@@ -181,6 +187,7 @@ func _fixed_process(delta):
 				velocity.y = -BOUNCE_SPEED
 				num_jumps = 1
 				wall_jump = false
+			emit_signal("surface_collision")
 		
 		
 		if (jump and not prev_jump_pressed and num_jumps > 0 and not smashing):
@@ -193,6 +200,7 @@ func _fixed_process(delta):
 		if (on_air_time > 0.15 and smash and not prev_smash_pressed and not smashing):
 			velocity.y = SMASH_SPEED
 			smashing = true
+			emit_signal("smashing")
 		
 		prev_jump_pressed = jump
 		prev_smash_pressed = smash
@@ -224,6 +232,14 @@ func die():
 	splash.set_pos(get_pos())
 	splash.setup(color)
 	get_parent().add_child(splash)
+
+func acquire_powerup(p):
+	powerup = p
+
+func activate_powerup():
+	if (powerup != null):
+		get_node("PowerupEffects/Pepper").effect(self)
+		powerup = null
 
 func _ready():
 	self.add_to_group("players", true)
