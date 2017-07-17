@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scripts/press_start.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/bg_start.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/logo.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/bitmaps/nokia.fnt" type="BitmapFont" id=4]
 [ext_resource path="res://scripts/blink.gd" type="Script" id=5]
+[ext_resource path="res://assets/videos/marca_video.ogv" type="VideoStream" id=6]
 
 [node name="Control" type="Control"]
 
@@ -83,5 +84,22 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 script/script = ExtResource( 5 )
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1024.0
+margin/bottom = 672.0
+stream/audio_track = 0
+stream/stream = ExtResource( 6 )
+stream/volume_db = 0.0
+stream/autoplay = true
+stream/paused = false
+expand = true
 
 
