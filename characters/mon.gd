@@ -7,7 +7,7 @@ extends KinematicBody2D
 # as long as it starts from a non-colliding spot too.
 
 # Member variables
-const GRAVITY = 1365.0 # Pixels/second
+const GRAVITY = 1300.0 # Pixels/second
 
 # Angle in degrees towards either side that the player can consider "floor"
 const FLOOR_ANGLE_TOLERANCE = 40
@@ -18,8 +18,8 @@ const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 210
 const SMASH_BONUS_WALK_FORCE = 1000
 const STOP_FORCE = 1200
-const JUMP_SPEED = 595
-const BOUNCE_SPEED = 295
+const JUMP_SPEED = 590
+const BOUNCE_SPEED = 290
 const SMASH_SPEED = 900
 const WALL_JUMP_THRESHOLD = 0.17
 const DEATH_ANIMATION_TIME = 1
