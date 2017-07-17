@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://powerups/powerup.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/pepper.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/ghost.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/powerup_particle.png" type="Texture" id=3]
 [ext_resource path="res://powerups/powerup_particles.gd" type="Script" id=4]
 
@@ -13,7 +13,7 @@ extents = Vector2( 13, 13 )
 [sub_resource type="ColorRamp" id=2]
 
 offsets = FloatArray( 0, 1 )
-colors = ColorArray( 1, 0, 0, 1, 0.991091, 0, 0, 0.225529 )
+colors = ColorArray( 1, 1, 1, 1, 1, 1, 1, 0.225529 )
 
 [node name="Powerup" type="Node2D"]
 

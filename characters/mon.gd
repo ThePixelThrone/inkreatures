@@ -7,15 +7,15 @@ extends KinematicBody2D
 # as long as it starts from a non-colliding spot too.
 
 # Member variables
-const GRAVITY = 1300.0 # Pixels/second
+const GRAVITY = 1280.0 # Pixels/second
 
 # Angle in degrees towards either side that the player can consider "floor"
 const FLOOR_ANGLE_TOLERANCE = 40
 # Angle that will kill a player upon contact
-const KILL_ANGLE_THRESHOLD = 46
+const KILL_ANGLE_THRESHOLD = 47
 const WALK_FORCE = 800
 const WALK_MIN_SPEED = 10
-const WALK_MAX_SPEED = 210
+const WALK_MAX_SPEED = 200
 const SMASH_BONUS_WALK_FORCE = 1000
 const STOP_FORCE = 1200
 const JUMP_SPEED = 590
@@ -69,10 +69,8 @@ func _fixed_process(delta):
 	
 	var stop = true
 	
-	if (not isAlive):
-		death_timer += delta
-		if (death_timer > DEATH_ANIMATION_TIME):
-			queue_free()
+	if (not isAlive and not get_node("AnimationPlayer").is_playing()):
+		queue_free()
 	
 	if (grounded):
 		grounded_timer -= delta
@@ -197,10 +195,13 @@ func _fixed_process(delta):
 			num_jumps -= 1
 		
 		
-		if (on_air_time > 0.15 and smash and not prev_smash_pressed and not smashing):
+		if (smash and on_air_time > 0.15 and not prev_smash_pressed and not smashing):
 			velocity.y = SMASH_SPEED
 			smashing = true
 			emit_signal("smashing")
+		
+		if (activate_powerup):
+			activate_powerup()
 		
 		prev_jump_pressed = jump
 		prev_smash_pressed = smash
@@ -238,7 +239,7 @@ func acquire_powerup(p):
 
 func activate_powerup():
 	if (powerup != null):
-		get_node("PowerupEffects/Pepper").effect(self)
+		get_node("PowerupEffects/Ghost").effect(self)
 		powerup = null
 
 func _ready():

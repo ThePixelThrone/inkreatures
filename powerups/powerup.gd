@@ -22,7 +22,9 @@ func setup():
 	elif (type == ROCKETS):
 		pass
 	elif (type == GHOST):
-		pass
+		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?
+		var tex = load("res://assets/images/ghost.png")
+		get_node("Sprite").set_texture(tex)
 	elif (type == NET):
 		pass
 	elif (type == BOMBERMON):
@@ -36,6 +38,6 @@ func setup():
 
 func _ready():
 	type = randi()%powerup_types.size()
-	type = PEPPER
+	type = GHOST
 	get_node("Area2D").connect("body_enter", self, "on_pickup")
 	setup()
