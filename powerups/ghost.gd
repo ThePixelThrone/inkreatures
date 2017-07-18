@@ -4,6 +4,7 @@ var mon = null
 
 func effect(player):
 	mon = player
+	player.remove_powerup()
 	get_parent().get_parent().get_node("Sprite").set_self_opacity(0.5)
 	get_parent().get_parent().set_collision_mask(2)
 	get_parent().get_parent().set_layer_mask(2)

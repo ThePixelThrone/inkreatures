@@ -12,7 +12,9 @@ func on_pickup(object):
 
 func setup():
 	if (type == FREEZE):
-		pass
+		get_node("Particles2D").change_color(Color(0.15,1,1,1)) # TODO : número mágico?
+		var tex = load("res://assets/images/freeze.png")
+		get_node("Sprite").set_texture(tex)
 	elif (type == HORNS):
 		pass
 	elif (type == SPIKES):
@@ -20,7 +22,9 @@ func setup():
 	elif (type == GOO):
 		pass
 	elif (type == ROCKETS):
-		pass
+		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?
+		var tex = load("res://assets/images/pepper.png")
+		get_node("Sprite").set_texture(tex)
 	elif (type == GHOST):
 		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?
 		var tex = load("res://assets/images/ghost.png")
@@ -38,6 +42,6 @@ func setup():
 
 func _ready():
 	type = randi()%powerup_types.size()
-	type = GHOST
+	type = ROCKETS
 	get_node("Area2D").connect("body_enter", self, "on_pickup")
 	setup()

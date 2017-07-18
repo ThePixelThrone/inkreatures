@@ -16,7 +16,8 @@ const KILL_ANGLE_THRESHOLD = 47
 const WALK_FORCE = 800
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 200
-const SMASH_BONUS_WALK_FORCE = 1000
+const SMASH_BONUS_WALK_FORCE = 1500
+const SMASH_WALK_SPEED = 300
 const STOP_FORCE = 1200
 const JUMP_SPEED = 590
 const BOUNCE_SPEED = 290
@@ -48,19 +49,21 @@ var color = "azul"
 var isAlive = true
 
 var time_flow = 1 # Gambiarra pra pepper TODO : fazer direito
+var upwards_accel = 0 # Used for power-ups
 
 var powerup = null # Powerup being held
 var splash_scene = null # Used to draw ink spatters
 
-signal kill # Signal emitted when killing another player
-signal smashing # Signal emitted when smashing
-signal surface_collision
+signal on_kill # Signal emitted when killing another player
+signal on_smash
+signal on_jump
+signal surface_collision # Emitted everytime landing on any surface
 
 func _fixed_process(delta):
 	delta *= time_flow
 	
 	# Create forces
-	var force = Vector2(0, GRAVITY)
+	var force = Vector2(0, GRAVITY-upwards_accel)
 	var walk_left = Input.is_action_pressed("p"+var2str(player)+"_left")
 	var walk_right = Input.is_action_pressed("p"+var2str(player)+"_right")
 	var jump = Input.is_action_pressed("p"+var2str(player)+"_jump")
@@ -84,14 +87,16 @@ func _fixed_process(delta):
 			num_jumps -= 1
 	
 	if (walk_left and not grounded and isAlive):
-		if ((velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED) or smashing):
+		var smash_condition = (smashing and velocity.x <= WALK_MIN_SPEED and velocity.x > -SMASH_WALK_SPEED)
+		if ((velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED) or smash_condition):
 			force.x -= WALK_FORCE
 			if (smashing):
 				force.x -= SMASH_BONUS_WALK_FORCE
 			stop = false
 			facing_left = true
 	elif (walk_right and not grounded and isAlive):
-		if ((velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED) or smashing):
+		var smash_condition = (smashing and velocity.x >= -WALK_MIN_SPEED and velocity.x < SMASH_WALK_SPEED)
+		if ((velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED) or smash_condition):
 			force.x += WALK_FORCE
 			if (smashing):
 				force.x += SMASH_BONUS_WALK_FORCE
@@ -131,10 +136,10 @@ func _fixed_process(delta):
 			if (isAlive and get_collider().isAlive):
 				if (angle > 180-KILL_ANGLE_THRESHOLD):
 					die()
-					emit_signal("kill", get_collider().player)
+					emit_signal("on_kill", get_collider().player)
 				elif (angle < KILL_ANGLE_THRESHOLD):
 					get_collider().die()
-					emit_signal("kill", player)
+					emit_signal("on_kill", player)
 		elif (get_collider().is_in_group("dynamic")):
 			if (isAlive):
 				get_collider().interact(self)
@@ -193,12 +198,13 @@ func _fixed_process(delta):
 			# Makes controls more snappy.
 			velocity.y = -JUMP_SPEED
 			num_jumps -= 1
+			emit_signal("on_jump")
 		
 		
 		if (smash and on_air_time > 0.15 and not prev_smash_pressed and not smashing):
 			velocity.y = SMASH_SPEED
 			smashing = true
-			emit_signal("smashing")
+			emit_signal("on_smash")
 		
 		if (activate_powerup):
 			activate_powerup()
@@ -239,8 +245,10 @@ func acquire_powerup(p):
 
 func activate_powerup():
 	if (powerup != null):
-		get_node("PowerupEffects/Ghost").effect(self)
-		powerup = null
+		get_node("PowerupEffects/Rockets").effect(self)
+
+func remove_powerup():
+	powerup = null
 
 func _ready():
 	self.add_to_group("players", true)
