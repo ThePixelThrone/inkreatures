@@ -22,8 +22,8 @@ func setup():
 	elif (type == GOO):
 		pass
 	elif (type == ROCKETS):
-		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?
-		var tex = load("res://assets/images/pepper.png")
+		get_node("Particles2D").change_color(Color(1,0.4,0.4,1)) # TODO : número mágico?
+		var tex = load("res://assets/images/rockets.png")
 		get_node("Sprite").set_texture(tex)
 	elif (type == GHOST):
 		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?

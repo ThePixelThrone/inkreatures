@@ -148,7 +148,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 
 resource/name = "Rockets"
 length = 1.0
@@ -175,9 +175,8 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 
-resource/name = "RocketsAcquire"
 length = 1.0
 loop = false
 step = 0.1
@@ -290,8 +289,8 @@ playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/Pepper = SubResource( 8 )
-anims/Rockets = SubResource( 10 )
-anims/RocketsAcquire = SubResource( 9 )
+anims/Rockets = SubResource( 9 )
+anims/RocketsAcquire = SubResource( 10 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
