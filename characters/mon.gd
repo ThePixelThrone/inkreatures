@@ -245,7 +245,7 @@ func acquire_powerup(p):
 
 func activate_powerup():
 	if (powerup != null):
-		get_node("PowerupEffects/Ghost").effect(self)
+		get_node("PowerupEffects").effect(self, powerup)
 
 func remove_powerup():
 	powerup = null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=1]
+[gd_scene load_steps=24 format=1]
 
 [ext_resource path="res://characters/mon.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=2]
@@ -6,11 +6,12 @@
 [ext_resource path="res://assets/images/m_01_azul.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/ink_particle_small.png" type="Texture" id=5]
 [ext_resource path="res://scripts/ink_particles.gd" type="Script" id=6]
-[ext_resource path="res://powerups/freeze.gd" type="Script" id=7]
-[ext_resource path="res://powerups/rockets.gd" type="Script" id=8]
-[ext_resource path="res://powerups/pepper.gd" type="Script" id=9]
-[ext_resource path="res://assets/images/flame_smash.png" type="Texture" id=10]
-[ext_resource path="res://powerups/ghost.gd" type="Script" id=11]
+[ext_resource path="res://powerups/powerup_effects.gd" type="Script" id=7]
+[ext_resource path="res://powerups/freeze.gd" type="Script" id=8]
+[ext_resource path="res://powerups/rockets.gd" type="Script" id=9]
+[ext_resource path="res://powerups/pepper.gd" type="Script" id=10]
+[ext_resource path="res://assets/images/flame_smash.png" type="Texture" id=11]
+[ext_resource path="res://powerups/ghost.gd" type="Script" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -283,6 +284,8 @@ script/script = ExtResource( 6 )
 
 [node name="PowerupEffects" type="Node2D" parent="."]
 
+script/script = ExtResource( 7 )
+
 [node name="PowerupAnimations" type="AnimationPlayer" parent="PowerupEffects"]
 
 playback/process_mode = 1
@@ -299,7 +302,7 @@ autoplay = ""
 [node name="Freeze" type="Node2D" parent="PowerupEffects"]
 
 editor/display_folded = true
-script/script = ExtResource( 7 )
+script/script = ExtResource( 8 )
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Freeze"]
 
@@ -310,7 +313,8 @@ autostart = false
 
 [node name="Rockets" type="Node2D" parent="PowerupEffects"]
 
-script/script = ExtResource( 8 )
+editor/display_folded = true
+script/script = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="PowerupEffects/Rockets"]
 
@@ -385,14 +389,14 @@ autostart = false
 [node name="Pepper" type="Node2D" parent="PowerupEffects"]
 
 editor/display_folded = true
-script/script = ExtResource( 9 )
+script/script = ExtResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="PowerupEffects/Pepper"]
 
 visibility/visible = false
 transform/pos = Vector2( 0, -6.00011 )
 transform/scale = Vector2( 1.4, 1.4 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 hframes = 4
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Pepper"]
@@ -405,7 +409,7 @@ autostart = false
 [node name="Ghost" type="Node2D" parent="PowerupEffects"]
 
 editor/display_folded = true
-script/script = ExtResource( 11 )
+script/script = ExtResource( 12 )
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Ghost"]
 
