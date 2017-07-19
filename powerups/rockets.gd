@@ -38,8 +38,11 @@ func reset_accel():
 
 func effect_finish():
 	mon.disconnect("surface_collision", self, "landed")
+	mon.disconnect("on_jump", self, "on_jump")
 	if (mon.powerup == get_node("/root/global").powerup_types.ROCKETS):
 		mon.remove_powerup()
+	get_node("LeftParticles").set_emitting(false)
+	get_node("RightParticles").set_emitting(false)
 	state = OFF
 	mon.upwards_accel = 0
 

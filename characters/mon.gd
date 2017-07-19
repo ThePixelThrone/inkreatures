@@ -41,6 +41,7 @@ var prev_jump_pressed = false
 var prev_smash_pressed = false
 var anim_state = 0
 
+var prev_facing_left = false
 var facing_left = false
 var wall_jump = true
 
@@ -57,6 +58,9 @@ var splash_scene = null # Used to draw ink spatters
 signal on_kill # Signal emitted when killing another player
 signal on_smash
 signal on_jump
+signal turn_left
+signal turn_right
+signal player_collision # Emitted on any player collision
 signal surface_collision # Emitted everytime landing on any surface
 
 func _fixed_process(delta):
@@ -87,16 +91,16 @@ func _fixed_process(delta):
 			num_jumps -= 1
 	
 	if (walk_left and not grounded and isAlive):
-		var smash_condition = (smashing and velocity.x <= WALK_MIN_SPEED and velocity.x > -SMASH_WALK_SPEED)
-		if ((velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED) or smash_condition):
+		if ((velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED)
+		or (smashing and velocity.x <= WALK_MIN_SPEED and velocity.x > -SMASH_WALK_SPEED)):
 			force.x -= WALK_FORCE
 			if (smashing):
 				force.x -= SMASH_BONUS_WALK_FORCE
 			stop = false
 			facing_left = true
 	elif (walk_right and not grounded and isAlive):
-		var smash_condition = (smashing and velocity.x >= -WALK_MIN_SPEED and velocity.x < SMASH_WALK_SPEED)
-		if ((velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED) or smash_condition):
+		if ((velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED)
+		or (smashing and velocity.x >= -WALK_MIN_SPEED and velocity.x < SMASH_WALK_SPEED)):
 			force.x += WALK_FORCE
 			if (smashing):
 				force.x += SMASH_BONUS_WALK_FORCE
@@ -134,12 +138,11 @@ func _fixed_process(delta):
 		
 		if (get_collider().is_in_group("players")): # Player collision
 			if (isAlive and get_collider().isAlive):
+				emit_signal("player_collision", self, get_collider())
 				if (angle > 180-KILL_ANGLE_THRESHOLD):
-					die()
-					emit_signal("on_kill", get_collider().player)
+					die(get_collider())
 				elif (angle < KILL_ANGLE_THRESHOLD):
-					get_collider().die()
-					emit_signal("on_kill", player)
+					get_collider().die(self)
 		elif (get_collider().is_in_group("dynamic")):
 			if (isAlive):
 				get_collider().interact(self)
@@ -213,9 +216,14 @@ func _fixed_process(delta):
 		prev_smash_pressed = smash
 		
 		if (facing_left):
-			self.set_scale(Vector2(-1, 1))
-		else:
-			self.set_scale(Vector2(1, 1))
+			if (not prev_facing_left):
+				emit_signal("turn_left")
+				self.set_scale(Vector2(-1, 1))
+				prev_facing_left = true
+		elif (prev_facing_left):
+				emit_signal("turn_right")
+				self.set_scale(Vector2(1, 1))
+				prev_facing_left = false
 		
 		if (smashing and anim_state != 4):
 			anim_state = 4
@@ -232,7 +240,8 @@ func _fixed_process(delta):
 		
 		on_air_time += delta
 
-func die():
+func die(killer):
+	killer.emit_signal("on_kill", killer.player)
 	get_node("AnimationPlayer").play("Die")
 	isAlive = false
 	var splash = splash_scene.instance()

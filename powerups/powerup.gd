@@ -35,7 +35,9 @@ func setup():
 	elif (type == powerup_types.BOMBERMON):
 		pass
 	elif (type == powerup_types.MEDUSA):
-		pass
+		get_node("Particles2D").change_color(Color(0,1,0,1)) # TODO : número mágico?
+		var tex = load("res://assets/images/medusa_temp.png")
+		get_node("Sprite").set_texture(tex)
 	elif (type == powerup_types.PEPPER):
 		get_node("Particles2D").change_color(Color(1,0,0,1)) # TODO : número mágico?
 		var tex = load("res://assets/images/pepper.png")
