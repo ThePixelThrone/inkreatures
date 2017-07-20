@@ -36,6 +36,7 @@ var death_timer = 0
 var num_jumps = 1
 var smashing = false
 var grounded = false
+var frozen = false
 
 var prev_jump_pressed = false
 var prev_smash_pressed = false
@@ -91,7 +92,7 @@ func _fixed_process(delta):
 		if (wall_jump and wall_jump_timer > WALL_JUMP_THRESHOLD):
 			num_jumps -= 1
 	
-	if (walk_left and not grounded and isAlive):
+	if (walk_left and not grounded and isAlive and not frozen):
 		if ((velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED)
 		or (smashing and velocity.x <= WALK_MIN_SPEED and velocity.x > -SMASH_WALK_SPEED)):
 			force.x -= WALK_FORCE
@@ -99,7 +100,7 @@ func _fixed_process(delta):
 				force.x -= SMASH_BONUS_WALK_FORCE
 			stop = false
 			facing_left = true
-	elif (walk_right and not grounded and isAlive):
+	elif (walk_right and not grounded and isAlive and not frozen):
 		if ((velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED)
 		or (smashing and velocity.x >= -WALK_MIN_SPEED and velocity.x < SMASH_WALK_SPEED)):
 			force.x += WALK_FORCE
@@ -125,7 +126,8 @@ func _fixed_process(delta):
 	var motion = velocity*delta
 	
 	# Move and consume motion
-	motion = move(motion)
+	if (not frozen):
+		motion = move(motion)
 	
 	var floor_velocity = Vector2()
 	
@@ -147,6 +149,9 @@ func _fixed_process(delta):
 		elif (get_collider().is_in_group("dynamic")):
 			if (isAlive):
 				get_collider().interact(self)
+		elif (get_collider().is_in_group("death_colliders")):
+			if (isAlive):
+				die()
 		
 		if (angle < FLOOR_ANGLE_TOLERANCE):
 			# If angle to the "up" vectors is < angle tolerance
@@ -175,7 +180,8 @@ func _fixed_process(delta):
 			motion = n.slide(motion)
 			velocity = n.slide(velocity)
 			# Then move again
-			move(motion)
+			if (not frozen):
+				move(motion)
 	
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor
@@ -197,7 +203,7 @@ func _fixed_process(delta):
 			emit_signal("surface_collision")
 		
 		
-		if (jump and not prev_jump_pressed and num_jumps > 0 and not smashing):
+		if (jump and not prev_jump_pressed and num_jumps > 0 and not smashing and not frozen):
 			# Jump must also be allowed to happen if the character left the floor a little bit ago.
 			# Makes controls more snappy.
 			velocity.y = -JUMP_SPEED
@@ -205,7 +211,7 @@ func _fixed_process(delta):
 			emit_signal("on_jump")
 		
 		
-		if (smash and on_air_time > 0.15 and not prev_smash_pressed and not smashing):
+		if (smash and on_air_time > 0.15 and not prev_smash_pressed and not smashing and not frozen):
 			velocity.y = SMASH_SPEED
 			smashing = true
 			emit_signal("on_smash")
@@ -240,6 +246,11 @@ func _fixed_process(delta):
 			get_node("AnimationPlayer").queue("Down")
 		
 		on_air_time += delta
+		if (frozen):
+			velocity.x = 0
+			velocity.y = 0
+			if (get_node("AnimationPlayer").is_playing()):
+				get_node("AnimationPlayer").stop()
 
 func killed_by_player(killer):
 	if (isAlive):
@@ -254,7 +265,7 @@ func die():
 		splash.set_pos(get_pos())
 		splash.setup(color)
 		get_parent().add_child(splash)
-		emit_signal("on_death")
+		emit_signal("on_death", self.player)
 
 func acquire_powerup(p):
 	powerup = p
@@ -265,6 +276,15 @@ func activate_powerup():
 
 func remove_powerup():
 	powerup = null
+
+func freeze():
+	frozen = true
+	get_node("AnimationPlayer").stop(false)
+	get_node("PowerupEffects/PowerupAnimations").play("Freeze")
+
+func unfreeze():
+	frozen = false
+	get_node("PowerupEffects/PowerupAnimations").play("Unfreeze")
 
 func _ready():
 	self.add_to_group("players", true)

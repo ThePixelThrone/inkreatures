@@ -13,7 +13,7 @@ func _on_player_kill(player):
 	score[player-1] += 1
 	print(score[player-1])
 
-func _on_player_death():
+func _on_player_death(player):
 	players_alive -= 1
 	if (players_alive == 1):
 		OS.set_time_scale(0.4)

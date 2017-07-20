@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=1]
+[gd_scene load_steps=42 format=1]
 
 [ext_resource path="res://characters/mon.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=2]
@@ -8,17 +8,19 @@
 [ext_resource path="res://scripts/ink_particles.gd" type="Script" id=6]
 [ext_resource path="res://powerups/powerup_effects.gd" type="Script" id=7]
 [ext_resource path="res://powerups/freeze.gd" type="Script" id=8]
-[ext_resource path="res://powerups/rockets.gd" type="Script" id=9]
-[ext_resource path="res://assets/images/sprite_jetpack_foguetes.png" type="Texture" id=10]
-[ext_resource path="res://assets/images/sprite_jetpack_braco.png" type="Texture" id=11]
-[ext_resource path="res://powerups/pepper.gd" type="Script" id=12]
-[ext_resource path="res://assets/images/flame_smash.png" type="Texture" id=13]
-[ext_resource path="res://powerups/ghost.gd" type="Script" id=14]
-[ext_resource path="res://powerups/medusa.gd" type="Script" id=15]
-[ext_resource path="res://assets/images/sprite_medusa.png" type="Texture" id=16]
-[ext_resource path="res://powerups/bombermon.gd" type="Script" id=17]
-[ext_resource path="res://powerups/horns.gd" type="Script" id=18]
-[ext_resource path="res://assets/images/horns_temp.png" type="Texture" id=19]
+[ext_resource path="res://assets/images/freeze_effect_temp.png" type="Texture" id=9]
+[ext_resource path="res://powerups/rockets.gd" type="Script" id=10]
+[ext_resource path="res://assets/images/sprite_jetpack_foguetes.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/sprite_jetpack_braco.png" type="Texture" id=12]
+[ext_resource path="res://powerups/pepper.gd" type="Script" id=13]
+[ext_resource path="res://assets/images/flame_smash.png" type="Texture" id=14]
+[ext_resource path="res://powerups/ghost.gd" type="Script" id=15]
+[ext_resource path="res://powerups/medusa.gd" type="Script" id=16]
+[ext_resource path="res://assets/images/sprite_medusa.png" type="Texture" id=17]
+[ext_resource path="res://powerups/bombermon.gd" type="Script" id=18]
+[ext_resource path="res://powerups/horns.gd" type="Script" id=19]
+[ext_resource path="res://assets/images/horns_temp.png" type="Texture" id=20]
+[ext_resource path="res://powerups/spikespowerup.gd" type="Script" id=21]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -130,21 +132,38 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=8]
 
 resource/name = "Bombermon"
 length = 1.0
 loop = false
 step = 0.1
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=9]
 
 resource/name = "BombermonAcquire"
 length = 1.0
 loop = false
 step = 0.1
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
+
+resource/name = "Freeze"
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Freeze/Sprite:visibility/visible")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=10]
 
 resource/name = "Horns"
 length = 0.1
@@ -161,9 +180,8 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=11]
 
-resource/name = "Medusa"
 length = 0.4
 loop = true
 step = 0.1
@@ -188,7 +206,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=12]
 
 length = 0.2
 loop = true
@@ -214,7 +232,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=13]
 
 length = 1.0
 loop = false
@@ -250,9 +268,8 @@ tracks/2/keys = {
 "values": [ 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=14]
 
-resource/name = "RocketsReady"
 length = 0.1
 loop = false
 step = 0.1
@@ -287,22 +304,39 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="ColorRamp" id=12]
+[sub_resource type="Animation" id=20]
+
+resource/name = "Unfreeze"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Freeze/Sprite:visibility/visible")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CircleShape2D" id=15]
+
+custom_solver_bias = 0.0
+radius = 86.5171
+
+[sub_resource type="ColorRamp" id=16]
 
 offsets = FloatArray( 0, 1 )
 colors = ColorArray( 1, 1, 1, 0.889373, 1, 1, 1, 0 )
 
-[sub_resource type="CircleShape2D" id=13]
-
-custom_solver_bias = 0.0
-radius = 70.5124
-
-[sub_resource type="ConvexPolygonShape2D" id=19]
+[sub_resource type="ConvexPolygonShape2D" id=17]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -7.2802, 0.738338, -7.2802, -7.41796, 0.0907364, -3.34476 )
 
-[sub_resource type="ConvexPolygonShape2D" id=20]
+[sub_resource type="ConvexPolygonShape2D" id=18]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -6.85091, -1.84228, 1.52002, -6.13012, 1.30538, 2.23587 )
@@ -412,13 +446,15 @@ script/script = ExtResource( 7 )
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Bombermon = SubResource( 15 )
-anims/BombermonAcquire = SubResource( 14 )
-anims/Horns = SubResource( 18 )
-anims/Medusa = SubResource( 8 )
-anims/Pepper = SubResource( 9 )
-anims/Rockets = SubResource( 10 )
-anims/RocketsReady = SubResource( 11 )
+anims/Bombermon = SubResource( 8 )
+anims/BombermonAcquire = SubResource( 9 )
+anims/Freeze = SubResource( 19 )
+anims/Horns = SubResource( 10 )
+anims/Medusa = SubResource( 11 )
+anims/Pepper = SubResource( 12 )
+anims/Rockets = SubResource( 13 )
+anims/RocketsReady = SubResource( 14 )
+anims/Unfreeze = SubResource( 20 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -429,17 +465,41 @@ autoplay = ""
 editor/display_folded = true
 script/script = ExtResource( 8 )
 
+[node name="Sprite" type="Sprite" parent="PowerupEffects/Freeze"]
+
+visibility/visible = false
+z/z = 1
+texture = ExtResource( 9 )
+
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Freeze"]
 
 process_mode = 1
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 autostart = false
+
+[node name="Area2D" type="Area2D" parent="PowerupEffects/Freeze"]
+
+visibility/visible = false
+input/pickable = true
+shapes/0/shape = SubResource( 15 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupEffects/Freeze/Area2D"]
+
+shape = SubResource( 15 )
+trigger = true
+_update_shape_index = 0
 
 [node name="Rockets" type="Node2D" parent="PowerupEffects"]
 
 editor/display_folded = true
-script/script = ExtResource( 9 )
+script/script = ExtResource( 10 )
 
 [node name="LeftParticles" type="Particles2D" parent="PowerupEffects/Rockets"]
 
@@ -466,7 +526,7 @@ params/final_size = 1.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-color/color_ramp = SubResource( 12 )
+color/color_ramp = SubResource( 16 )
 
 [node name="RightParticles" type="Particles2D" parent="PowerupEffects/Rockets"]
 
@@ -493,13 +553,13 @@ params/final_size = 1.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-color/color_ramp = SubResource( 12 )
+color/color_ramp = SubResource( 16 )
 
 [node name="BackSprite" type="Sprite" parent="PowerupEffects/Rockets"]
 
 visibility/visible = false
 transform/pos = Vector2( -9, 6 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 hframes = 3
 
 [node name="FrontSprite" type="Sprite" parent="PowerupEffects/Rockets"]
@@ -507,7 +567,7 @@ hframes = 3
 visibility/visible = false
 transform/pos = Vector2( -12, 6 )
 z/z = 1
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Rockets"]
 
@@ -526,7 +586,7 @@ autostart = false
 [node name="Pepper" type="Node2D" parent="PowerupEffects"]
 
 editor/display_folded = true
-script/script = ExtResource( 12 )
+script/script = ExtResource( 13 )
 
 [node name="Sprite" type="Sprite" parent="PowerupEffects/Pepper"]
 
@@ -534,7 +594,7 @@ visibility/visible = false
 transform/pos = Vector2( 0, -6.00011 )
 transform/scale = Vector2( 1.4, 1.4 )
 z/z = 1
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 hframes = 4
 frame = 3
 
@@ -548,7 +608,7 @@ autostart = false
 [node name="Ghost" type="Node2D" parent="PowerupEffects"]
 
 editor/display_folded = true
-script/script = ExtResource( 14 )
+script/script = ExtResource( 15 )
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Ghost"]
 
@@ -560,13 +620,13 @@ autostart = false
 [node name="Medusa" type="Node2D" parent="PowerupEffects"]
 
 editor/display_folded = true
-script/script = ExtResource( 15 )
+script/script = ExtResource( 16 )
 
 [node name="Sprite" type="Sprite" parent="PowerupEffects/Medusa"]
 
 visibility/visible = false
 transform/pos = Vector2( 0, -6 )
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 hframes = 4
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Medusa"]
@@ -579,7 +639,7 @@ autostart = false
 [node name="Bombermon" type="Node2D" parent="PowerupEffects"]
 
 editor/display_folded = true
-script/script = ExtResource( 17 )
+script/script = ExtResource( 18 )
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Bombermon"]
 
@@ -591,7 +651,7 @@ autostart = false
 [node name="Area2D" type="Area2D" parent="PowerupEffects/Bombermon"]
 
 input/pickable = true
-shapes/0/shape = SubResource( 13 )
+shapes/0/shape = SubResource( 15 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
@@ -602,7 +662,7 @@ angular_damp = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupEffects/Bombermon/Area2D"]
 
 visibility/visible = false
-shape = SubResource( 13 )
+shape = SubResource( 15 )
 trigger = true
 _update_shape_index = 0
 
@@ -631,11 +691,13 @@ max_lines_visible = -1
 
 [node name="Horns" type="Node2D" parent="PowerupEffects"]
 
-script/script = ExtResource( 18 )
+editor/display_folded = true
+script/script = ExtResource( 19 )
 
 [node name="Sprite" type="Sprite" parent="PowerupEffects/Horns"]
 
-texture = ExtResource( 19 )
+visibility/visible = false
+texture = ExtResource( 20 )
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Horns"]
 
@@ -646,11 +708,12 @@ autostart = false
 
 [node name="Area2D" type="Area2D" parent="PowerupEffects/Horns"]
 
+visibility/visible = false
 input/pickable = true
-shapes/0/shape = SubResource( 19 )
+shapes/0/shape = SubResource( 17 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 21.5371, 10.0149 )
 shapes/0/trigger = true
-shapes/1/shape = SubResource( 20 )
+shapes/1/shape = SubResource( 18 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, -15.1712, 8.72701 )
 shapes/1/trigger = true
 gravity_vec = Vector2( 0, 1 )
@@ -673,5 +736,9 @@ build_mode = 0
 polygon = Vector2Array( 1.30538, 2.23587, 1.52002, -6.13012, -6.85091, -1.84228 )
 shape_range = Vector2( 1, 1 )
 trigger = true
+
+[node name="Spikes" type="Node2D" parent="PowerupEffects"]
+
+script/script = ExtResource( 21 )
 
 

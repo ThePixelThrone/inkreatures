@@ -21,7 +21,9 @@ func setup():
 		var tex = load("res://assets/images/horns_temp_icon.png")
 		get_node("Sprite").set_texture(tex)
 	elif (type == powerup_types.SPIKES):
-		pass
+		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?
+		var tex = load("res://assets/images/espinhos.png")
+		get_node("Sprite").set_texture(tex)
 	elif (type == powerup_types.GOO):
 		pass
 	elif (type == powerup_types.ROCKETS):
@@ -50,6 +52,6 @@ func setup():
 func _ready():
 	powerup_types = get_node("/root/global").powerup_types
 	type = randi()%powerup_types.size()
-	type = powerup_types.HORNS
+	type = powerup_types.SPIKES
 	get_node("Area2D").connect("body_enter", self, "on_pickup")
 	setup()
