@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=1]
+[gd_scene load_steps=38 format=1]
 
 [ext_resource path="res://characters/mon.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://powerups/medusa.gd" type="Script" id=15]
 [ext_resource path="res://assets/images/sprite_medusa.png" type="Texture" id=16]
 [ext_resource path="res://powerups/bombermon.gd" type="Script" id=17]
+[ext_resource path="res://powerups/horns.gd" type="Script" id=18]
+[ext_resource path="res://assets/images/horns_temp.png" type="Texture" id=19]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -141,6 +143,23 @@ resource/name = "BombermonAcquire"
 length = 1.0
 loop = false
 step = 0.1
+
+[sub_resource type="Animation" id=18]
+
+resource/name = "Horns"
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Horns/Sprite:visibility/visible")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=8]
 
@@ -278,6 +297,16 @@ colors = ColorArray( 1, 1, 1, 0.889373, 1, 1, 1, 0 )
 custom_solver_bias = 0.0
 radius = 70.5124
 
+[sub_resource type="ConvexPolygonShape2D" id=19]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -7.2802, 0.738338, -7.2802, -7.41796, 0.0907364, -3.34476 )
+
+[sub_resource type="ConvexPolygonShape2D" id=20]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -6.85091, -1.84228, 1.52002, -6.13012, 1.30538, 2.23587 )
+
 [node name="Mon" type="KinematicBody2D"]
 
 input/pickable = false
@@ -385,6 +414,7 @@ playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/Bombermon = SubResource( 15 )
 anims/BombermonAcquire = SubResource( 14 )
+anims/Horns = SubResource( 18 )
 anims/Medusa = SubResource( 8 )
 anims/Pepper = SubResource( 9 )
 anims/Rockets = SubResource( 10 )
@@ -560,11 +590,10 @@ autostart = false
 
 [node name="Area2D" type="Area2D" parent="PowerupEffects/Bombermon"]
 
-editor/display_folded = true
 input/pickable = true
 shapes/0/shape = SubResource( 13 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
+shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
@@ -574,7 +603,7 @@ angular_damp = 1.0
 
 visibility/visible = false
 shape = SubResource( 13 )
-trigger = false
+trigger = true
 _update_shape_index = 0
 
 [node name="Label" type="Label" parent="PowerupEffects/Bombermon"]
@@ -599,5 +628,50 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="Horns" type="Node2D" parent="PowerupEffects"]
+
+script/script = ExtResource( 18 )
+
+[node name="Sprite" type="Sprite" parent="PowerupEffects/Horns"]
+
+texture = ExtResource( 19 )
+
+[node name="DurationTimer" type="Timer" parent="PowerupEffects/Horns"]
+
+process_mode = 1
+wait_time = 7.0
+one_shot = true
+autostart = false
+
+[node name="Area2D" type="Area2D" parent="PowerupEffects/Horns"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 19 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 21.5371, 10.0149 )
+shapes/0/trigger = true
+shapes/1/shape = SubResource( 20 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, -15.1712, 8.72701 )
+shapes/1/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PowerupEffects/Horns/Area2D"]
+
+transform/pos = Vector2( 21.5371, 10.0149 )
+build_mode = 0
+polygon = Vector2Array( 0.0907364, -3.34476, -7.2802, -7.41796, -7.2802, 0.738338 )
+shape_range = Vector2( 0, 0 )
+trigger = true
+
+[node name="CollisionPolygon2D1" type="CollisionPolygon2D" parent="PowerupEffects/Horns/Area2D"]
+
+transform/pos = Vector2( -15.1712, 8.72701 )
+build_mode = 0
+polygon = Vector2Array( 1.30538, 2.23587, 1.52002, -6.13012, -6.85091, -1.84228 )
+shape_range = Vector2( 1, 1 )
+trigger = true
 
 
