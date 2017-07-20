@@ -11,11 +11,14 @@ var rounds = 3
 
 func _on_player_kill(player):
 	score[player-1] += 1
+	print(score[player-1])
+
+func _on_player_death():
 	players_alive -= 1
 	if (players_alive == 1):
 		OS.set_time_scale(0.4)
 		round_finish()
-	print(score[player-1])
+
 
 func round_finish():
 	pass
@@ -33,6 +36,7 @@ func _ready():
 		get_node(node_name+"/Ink").setup(colors[i])
 		get_node(node_name).color = colors[i]
 		get_node(node_name).connect("on_kill", self, "_on_player_kill")
+		get_node(node_name).connect("on_death", self, "_on_player_death")
 	
 	# Remove unused players
 	for i in range(num_players+1, MAX_PLAYERS+1):

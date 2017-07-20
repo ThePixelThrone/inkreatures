@@ -12,9 +12,9 @@ func effect(player):
 func on_collision(player1, player2):
 	if (player1.isAlive and player2.isAlive):
 		if (mon == player1):
-			player2.die(player1)
+			player2.killed_by_player(player1)
 		else:
-			player1.die(player2)
+			player1.killed_by_player(player2)
 
 func effect_finish():
 	get_node("Sprite").hide()

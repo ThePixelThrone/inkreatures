@@ -56,6 +56,7 @@ var powerup = null # Powerup being held
 var splash_scene = null # Used to draw ink spatters
 
 signal on_kill # Signal emitted when killing another player
+signal on_death
 signal on_smash
 signal on_jump
 signal turn_left
@@ -140,9 +141,9 @@ func _fixed_process(delta):
 			if (isAlive and get_collider().isAlive):
 				emit_signal("player_collision", self, get_collider())
 				if (angle > 180-KILL_ANGLE_THRESHOLD):
-					die(get_collider())
+					killed_by_player(get_collider())
 				elif (angle < KILL_ANGLE_THRESHOLD):
-					get_collider().die(self)
+					get_collider().killed_by_player(self)
 		elif (get_collider().is_in_group("dynamic")):
 			if (isAlive):
 				get_collider().interact(self)
@@ -240,15 +241,20 @@ func _fixed_process(delta):
 		
 		on_air_time += delta
 
-func die(killer):
+func killed_by_player(killer):
 	if (isAlive):
 		killer.emit_signal("on_kill", killer.player)
+		die()
+
+func die():
+	if (isAlive):
 		get_node("AnimationPlayer").play("Die")
 		isAlive = false
 		var splash = splash_scene.instance()
 		splash.set_pos(get_pos())
 		splash.setup(color)
 		get_parent().add_child(splash)
+		emit_signal("on_death")
 
 func acquire_powerup(p):
 	powerup = p
