@@ -1,6 +1,5 @@
 extends Node2D
 
-var sprite
 var mon = null
 
 func effect(player):
@@ -11,16 +10,16 @@ func effect(player):
 	get_node("DurationTimer").start()
 
 func on_collision(player1, player2):
-	if (mon == player1):
-		player2.die(player1)
-	else:
-		player1.die(player2)
+	if (player1.isAlive and player2.isAlive):
+		if (mon == player1):
+			player2.die(player1)
+		else:
+			player1.die(player2)
 
 func effect_finish():
-	sprite.hide()
+	get_node("Sprite").hide()
 	mon.disconnect("player_collision", self, "on_collision")
 	get_parent().get_node("PowerupAnimations").stop(true)
 
 func _ready():
-	sprite = get_node("Sprite")
 	get_node("DurationTimer").connect("timeout", self, "effect_finish")

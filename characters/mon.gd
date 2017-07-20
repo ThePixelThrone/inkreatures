@@ -241,13 +241,14 @@ func _fixed_process(delta):
 		on_air_time += delta
 
 func die(killer):
-	killer.emit_signal("on_kill", killer.player)
-	get_node("AnimationPlayer").play("Die")
-	isAlive = false
-	var splash = splash_scene.instance()
-	splash.set_pos(get_pos())
-	splash.setup(color)
-	get_parent().add_child(splash)
+	if (isAlive):
+		killer.emit_signal("on_kill", killer.player)
+		get_node("AnimationPlayer").play("Die")
+		isAlive = false
+		var splash = splash_scene.instance()
+		splash.set_pos(get_pos())
+		splash.setup(color)
+		get_parent().add_child(splash)
 
 func acquire_powerup(p):
 	powerup = p

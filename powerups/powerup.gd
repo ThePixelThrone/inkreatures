@@ -24,11 +24,11 @@ func setup():
 		pass
 	elif (type == powerup_types.ROCKETS):
 		get_node("Particles2D").change_color(Color(1,0.4,0.4,1)) # TODO : número mágico?
-		var tex = load("res://assets/images/rockets.png")
+		var tex = load("res://assets/images/icone_jetpack.png")
 		get_node("Sprite").set_texture(tex)
 	elif (type == powerup_types.GHOST):
 		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?
-		var tex = load("res://assets/images/ghost.png")
+		var tex = load("res://assets/images/icone_ghost.png")
 		get_node("Sprite").set_texture(tex)
 	elif (type == powerup_types.NET):
 		pass
@@ -36,7 +36,7 @@ func setup():
 		pass
 	elif (type == powerup_types.MEDUSA):
 		get_node("Particles2D").change_color(Color(0,1,0,1)) # TODO : número mágico?
-		var tex = load("res://assets/images/medusa_temp.png")
+		var tex = load("res://assets/images/icone_medusa.png")
 		get_node("Sprite").set_texture(tex)
 	elif (type == powerup_types.PEPPER):
 		get_node("Particles2D").change_color(Color(1,0,0,1)) # TODO : número mágico?

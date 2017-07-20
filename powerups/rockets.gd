@@ -14,7 +14,7 @@ func effect(player):
 		mon = player
 		player.connect("surface_collision", self, "landed")
 		player.connect("on_jump", self, "on_jump")
-		get_parent().get_node("PowerupAnimations").play("RocketsAcquire")
+		get_parent().get_node("PowerupAnimations").play("RocketsReady")
 		get_node("DurationTimer").start()
 	elif (state == ON and not player.smashing):
 		get_parent().get_node("PowerupAnimations").play("Rockets")
@@ -30,6 +30,7 @@ func landed():
 	if (state == FLYING):
 		get_node("LeftParticles").set_emitting(false)
 		get_node("RightParticles").set_emitting(false)
+		get_parent().get_node("PowerupAnimations").play("RocketsReady")
 		mon.upwards_accel = 0
 		state = ON
 
@@ -41,6 +42,8 @@ func effect_finish():
 	mon.disconnect("on_jump", self, "on_jump")
 	if (mon.powerup == get_node("/root/global").powerup_types.ROCKETS):
 		mon.remove_powerup()
+	get_node("BackSprite").hide()
+	get_node("FrontSprite").hide()
 	get_node("LeftParticles").set_emitting(false)
 	get_node("RightParticles").set_emitting(false)
 	state = OFF
