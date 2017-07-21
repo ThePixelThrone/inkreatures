@@ -4,21 +4,18 @@ const MAX_PLAYERS = 4
 
 var player_joined = [false, false, false, false]
 var player_ready = [false, false, false, false]
-var player_list = []
 
 var ready_count = 0
 var joined_count = 0
 
 var everyone_ready = false
 
-func game_start(): # TODO
-	print("start")
-	for player in player_list:
-		var p = get_node("tube"+var2str(player))
-		print("-----")
-		print("Player: "+var2str(player))
-		print("Monster: "+var2str(p.selected_monster))
-		print("Color: "+p.colors[p.selected_color])
+func game_start():
+	for player in range(MAX_PLAYERS):
+		if (player_ready[player]):
+			var p = get_node("tube"+var2str(player))
+			get_node("/root/global").add_player(player+1, p.colors[p.selected_color], p.selected_monster)
+	get_node("/root/global").game_start()
 
 func all_players_ready(all_ready):
 	if (all_ready):
@@ -41,18 +38,16 @@ func set_join(join, player):
 func set_ready(ready, player):
 	get_node("tube"+var2str(player)).set_ready(ready)
 	if (ready):
-		player_list.append(player)
 		ready_count += 1
 		player_ready[player] = true
 	else:
-		player_list.erase(player)
 		ready_count -= 1
 		player_ready[player] = false
 	all_players_ready(ready_count == joined_count)
 
 func _input(event):
 	if (everyone_ready): # Check if anyone pressed start
-		for p in player_list:
+		for p in range(MAX_PLAYERS):
 			if (event.is_action_pressed("p"+var2str(p+1)+"_start")):
 				game_start()
 	

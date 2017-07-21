@@ -2,8 +2,7 @@ extends Node2D
 
 const TOTAL_MONSTERS = 5
 
-var colors = ["blue", "red", "green", "yellow"]
-var tube_colors = []
+var colors
 var selected_color = 0
 var selected_monster = 1
 
@@ -45,5 +44,6 @@ func prev_mon():
 	mon_animator.play(colors[selected_color]+var2str(selected_monster))
 
 func _ready():
+	colors = get_node("/root/global").colors
 	animator = get_node("TubeAnimation")
 	mon_animator = get_node("MonAnimation")
