@@ -34,7 +34,7 @@ func update_cursor(opt):
 	
 func select(opt):
 	if (opt == PLAY):
-		get_tree().change_scene("res://scenes/Stage1.tscn")
+		get_tree().change_scene("res://scenes/CharacterSelection.tscn")
 	elif (opt == OPTIONS):
 		pass
 	elif (opt == QUIT):

@@ -54,6 +54,7 @@ func setup():
 func _ready():
 	powerup_types = get_node("/root/global").powerup_types
 	type = randi()%powerup_types.size()
-	type = powerup_types.NET
+	while (type == powerup_types.GOO):
+		type = randi()%powerup_types.size()
 	get_node("Area2D").connect("body_enter", self, "on_pickup")
 	setup()
