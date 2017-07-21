@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=1]
 
-[ext_resource path="res://scripts/stage1.gd" type="Script" id=1]
+[ext_resource path="res://scripts/stage.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/level_teste.png" type="Texture" id=2]
 [ext_resource path="res://tilesets/tileset1.tres" type="TileSet" id=3]
 [ext_resource path="res://objects/Platform.tscn" type="PackedScene" id=4]

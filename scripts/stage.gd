@@ -27,7 +27,6 @@ func _ready():
 	# Player setup
 	players = get_node("/root/global").player_list
 	for player in players:
-		print(player.number)
 		not_playing.erase(player.number)
 		var node_name = "player"+var2str(player.number)
 		get_node(node_name).player = player.number
