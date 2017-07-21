@@ -35,7 +35,9 @@ func setup():
 		var tex = load("res://assets/images/icone_ghost.png")
 		get_node("Sprite").set_texture(tex)
 	elif (type == powerup_types.NET):
-		pass
+		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?
+		var tex = load("res://assets/images/net_temp_icon.png")
+		get_node("Sprite").set_texture(tex)
 	elif (type == powerup_types.BOMBERMON):
 		get_node("Particles2D").change_color(Color(1,0.4,0.4,1)) # TODO : número mágico?
 		var tex = load("res://assets/images/bombermon_temp.png")
@@ -52,6 +54,6 @@ func setup():
 func _ready():
 	powerup_types = get_node("/root/global").powerup_types
 	type = randi()%powerup_types.size()
-	type = powerup_types.SPIKES
+	type = powerup_types.NET
 	get_node("Area2D").connect("body_enter", self, "on_pickup")
 	setup()

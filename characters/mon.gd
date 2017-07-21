@@ -203,7 +203,7 @@ func _fixed_process(delta):
 			emit_signal("surface_collision")
 		
 		
-		if (jump and not prev_jump_pressed and num_jumps > 0 and not smashing and not frozen):
+		if (jump and not prev_jump_pressed and num_jumps > 0 and not smashing and not frozen and not grounded):
 			# Jump must also be allowed to happen if the character left the floor a little bit ago.
 			# Makes controls more snappy.
 			velocity.y = -JUMP_SPEED
@@ -211,7 +211,7 @@ func _fixed_process(delta):
 			emit_signal("on_jump")
 		
 		
-		if (smash and on_air_time > 0.15 and not prev_smash_pressed and not smashing and not frozen):
+		if (smash and on_air_time > 0.15 and not prev_smash_pressed and not smashing and not frozen and not grounded):
 			velocity.y = SMASH_SPEED
 			smashing = true
 			emit_signal("on_smash")
@@ -285,6 +285,11 @@ func freeze():
 func unfreeze():
 	frozen = false
 	get_node("PowerupEffects/PowerupAnimations").play("Unfreeze")
+
+func net():
+	grounded = true
+	grounded_timer = get_node("PowerupEffects/Net/GroundedTimer").get_wait_time()
+	get_node("PowerupEffects/PowerupAnimations").play("Net")
 
 func _ready():
 	self.add_to_group("players", true)
