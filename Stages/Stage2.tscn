@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=1]
 
-[ext_resource path="res://scripts/stage.gd" type="Script" id=1]
+[ext_resource path="res://Stages/stage.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/level_teste.png" type="Texture" id=2]
-[ext_resource path="res://tilesets/tileset1.tres" type="TileSet" id=3]
-[ext_resource path="res://objects/Platform.tscn" type="PackedScene" id=4]
-[ext_resource path="res://characters/mon.tscn" type="PackedScene" id=5]
-[ext_resource path="res://powerups/Powerup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Stages/tilesets/tileset1.tres" type="TileSet" id=3]
+[ext_resource path="res://Stages/dynamic_objects/Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Stages/powerup/Powerup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Stages/mon/Mon.tscn" type="PackedScene" id=6]
 
 [node name="Stage" type="Node2D"]
 
@@ -64,24 +64,24 @@ transform/pos = Vector2( 640, 320 )
 
 transform/pos = Vector2( 544, 160 )
 
-[node name="player1" parent="." instance=ExtResource( 5 )]
+[node name="Powerup" parent="." instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 512, 352 )
+
+[node name="player1" parent="." instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 128, 512 )
 
-[node name="player2" parent="." instance=ExtResource( 5 )]
+[node name="player2" parent="." instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 416, 384 )
 
-[node name="player3" parent="." instance=ExtResource( 5 )]
+[node name="player3" parent="." instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 608, 384 )
 
-[node name="player4" parent="." instance=ExtResource( 5 )]
+[node name="player4" parent="." instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 896, 512 )
-
-[node name="Powerup" parent="." instance=ExtResource( 6 )]
-
-transform/pos = Vector2( 512, 352 )
 
 

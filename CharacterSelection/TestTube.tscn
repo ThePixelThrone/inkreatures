@@ -1,6 +1,6 @@
 [gd_scene load_steps=67 format=1]
 
-[ext_resource path="res://scripts/test_tube.gd" type="Script" id=1]
+[ext_resource path="res://CharacterSelection/test_tube.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/fundo_selecao.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/spriteparticulaamarela.png" type="Texture" id=3]
 [ext_resource path="res://assets/gfx/join.png" type="Texture" id=4]
@@ -64,7 +64,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=2]
 
 resource/name = "Ready_amarelo"
 length = 0.1
@@ -172,7 +172,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=32]
+[sub_resource type="Animation" id=6]
 
 resource/name = "Select_amarelo"
 length = 0.1
@@ -209,7 +209,7 @@ tracks/2/keys = {
 "values": [ ExtResource( 3 ) ]
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=7]
 
 length = 0.1
 loop = false
@@ -245,7 +245,7 @@ tracks/2/keys = {
 "values": [ ExtResource( 11 ) ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=8]
 
 length = 0.1
 loop = false
@@ -318,7 +318,7 @@ tracks/2/keys = {
 "values": [ ExtResource( 15 ) ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=10]
 
 resource/name = "amarelo1"
 length = 0.1
@@ -335,7 +335,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 16 ) ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=11]
 
 resource/name = "amarelo2"
 length = 0.1
@@ -352,7 +352,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 17 ) ]
 }
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=12]
 
 resource/name = "amarelo3"
 length = 0.1
@@ -369,7 +369,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 18 ) ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=13]
 
 resource/name = "amarelo4"
 length = 0.1
@@ -386,7 +386,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 19 ) ]
 }
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=14]
 
 resource/name = "amarelo5"
 length = 0.1
@@ -403,9 +403,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 20 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=15]
 
-resource/name = "azul1"
 length = 0.1
 loop = false
 step = 0.1
@@ -420,9 +419,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 21 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=16]
 
-resource/name = "azul2"
 length = 0.1
 loop = false
 step = 0.1
@@ -437,9 +435,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 22 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=17]
 
-resource/name = "azul3"
 length = 0.1
 loop = false
 step = 0.1
@@ -454,9 +451,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 23 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=18]
 
-resource/name = "azul4"
 length = 0.1
 loop = false
 step = 0.1
@@ -471,9 +467,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 24 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=19]
 
-resource/name = "azul5"
 length = 0.1
 loop = false
 step = 0.1
@@ -488,7 +483,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 25 ) ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=20]
 
 resource/name = "vanish"
 length = 0.1
@@ -505,9 +500,8 @@ tracks/0/keys = {
 "values": [ null ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=21]
 
-resource/name = "verde1"
 length = 0.1
 loop = false
 step = 0.1
@@ -522,9 +516,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 26 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=22]
 
-resource/name = "verde2"
 length = 0.1
 loop = false
 step = 0.1
@@ -539,9 +532,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 27 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=23]
 
-resource/name = "verde3"
 length = 0.1
 loop = false
 step = 0.1
@@ -556,9 +548,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 28 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=24]
 
-resource/name = "verde4"
 length = 0.1
 loop = false
 step = 0.1
@@ -573,9 +564,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 29 ) ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=25]
 
-resource/name = "verde5"
 length = 0.1
 loop = false
 step = 0.1
@@ -590,9 +580,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 30 ) ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=26]
 
-resource/name = "vermelho1"
 length = 0.1
 loop = false
 step = 0.1
@@ -607,9 +596,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 31 ) ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=27]
 
-resource/name = "vermelho2"
 length = 0.1
 loop = false
 step = 0.1
@@ -624,9 +612,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 32 ) ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=28]
 
-resource/name = "vermelho3"
 length = 0.1
 loop = false
 step = 0.1
@@ -641,9 +628,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 33 ) ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=29]
 
-resource/name = "vermelho4"
 length = 0.1
 loop = false
 step = 0.1
@@ -658,9 +644,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 34 ) ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=30]
 
-resource/name = "vermelho5"
 length = 0.1
 loop = false
 step = 0.1
@@ -734,13 +719,13 @@ playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/Jump_to_join = SubResource( 1 )
-anims/Ready_amarelo = SubResource( 31 )
+anims/Ready_amarelo = SubResource( 2 )
 anims/Ready_azul = SubResource( 3 )
 anims/Ready_verde = SubResource( 4 )
 anims/Ready_vermelho = SubResource( 5 )
-anims/Select_amarelo = SubResource( 32 )
-anims/Select_azul = SubResource( 33 )
-anims/Select_verde = SubResource( 34 )
+anims/Select_amarelo = SubResource( 6 )
+anims/Select_azul = SubResource( 7 )
+anims/Select_verde = SubResource( 8 )
 anims/Select_vermelho = SubResource( 9 )
 playback/active = true
 playback/speed = 1.0
@@ -752,27 +737,27 @@ autoplay = ""
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/amarelo1 = SubResource( 26 )
-anims/amarelo2 = SubResource( 27 )
-anims/amarelo3 = SubResource( 28 )
-anims/amarelo4 = SubResource( 29 )
-anims/amarelo5 = SubResource( 30 )
-anims/azul1 = SubResource( 10 )
-anims/azul2 = SubResource( 11 )
-anims/azul3 = SubResource( 12 )
-anims/azul4 = SubResource( 13 )
-anims/azul5 = SubResource( 14 )
-anims/vanish = SubResource( 25 )
-anims/verde1 = SubResource( 15 )
-anims/verde2 = SubResource( 16 )
-anims/verde3 = SubResource( 17 )
-anims/verde4 = SubResource( 18 )
-anims/verde5 = SubResource( 19 )
-anims/vermelho1 = SubResource( 20 )
-anims/vermelho2 = SubResource( 21 )
-anims/vermelho3 = SubResource( 22 )
-anims/vermelho4 = SubResource( 23 )
-anims/vermelho5 = SubResource( 24 )
+anims/amarelo1 = SubResource( 10 )
+anims/amarelo2 = SubResource( 11 )
+anims/amarelo3 = SubResource( 12 )
+anims/amarelo4 = SubResource( 13 )
+anims/amarelo5 = SubResource( 14 )
+anims/azul1 = SubResource( 15 )
+anims/azul2 = SubResource( 16 )
+anims/azul3 = SubResource( 17 )
+anims/azul4 = SubResource( 18 )
+anims/azul5 = SubResource( 19 )
+anims/vanish = SubResource( 20 )
+anims/verde1 = SubResource( 21 )
+anims/verde2 = SubResource( 22 )
+anims/verde3 = SubResource( 23 )
+anims/verde4 = SubResource( 24 )
+anims/verde5 = SubResource( 25 )
+anims/vermelho1 = SubResource( 26 )
+anims/vermelho2 = SubResource( 27 )
+anims/vermelho3 = SubResource( 28 )
+anims/vermelho4 = SubResource( 29 )
+anims/vermelho5 = SubResource( 30 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

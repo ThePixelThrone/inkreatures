@@ -17,4 +17,4 @@ func effect(player):
 	get_parent().get_parent().get_parent().add_child(spikes)
 
 func _ready():
-	spikes_scene = load("res://powerups/SpikesPowerup.tscn")
+	spikes_scene = load(get_node("/root/global").powerup_effects_dir+"SpikesPowerup.tscn")

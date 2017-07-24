@@ -1,27 +1,27 @@
 [gd_scene load_steps=46 format=1]
 
-[ext_resource path="res://characters/mon.gd" type="Script" id=1]
+[ext_resource path="res://Stages/mon/mon.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=2]
-[ext_resource path="res://characters/trail.gd" type="Script" id=3]
+[ext_resource path="res://Stages/mon/trail.gd" type="Script" id=3]
 [ext_resource path="res://assets/images/m_01_azul.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/ink_particle_small.png" type="Texture" id=5]
-[ext_resource path="res://scripts/ink_particles.gd" type="Script" id=6]
-[ext_resource path="res://powerups/powerup_effects.gd" type="Script" id=7]
-[ext_resource path="res://powerups/freeze.gd" type="Script" id=8]
+[ext_resource path="res://Stages/mon/ink_particles.gd" type="Script" id=6]
+[ext_resource path="res://Stages/mon/powerup_effects/powerup_effects.gd" type="Script" id=7]
+[ext_resource path="res://Stages/mon/powerup_effects/freeze.gd" type="Script" id=8]
 [ext_resource path="res://assets/images/freeze_effect_temp.png" type="Texture" id=9]
-[ext_resource path="res://powerups/rockets.gd" type="Script" id=10]
+[ext_resource path="res://Stages/mon/powerup_effects/rockets.gd" type="Script" id=10]
 [ext_resource path="res://assets/images/sprite_jetpack_foguetes.png" type="Texture" id=11]
 [ext_resource path="res://assets/images/sprite_jetpack_braco.png" type="Texture" id=12]
-[ext_resource path="res://powerups/pepper.gd" type="Script" id=13]
+[ext_resource path="res://Stages/mon/powerup_effects/pepper.gd" type="Script" id=13]
 [ext_resource path="res://assets/images/flame_smash.png" type="Texture" id=14]
-[ext_resource path="res://powerups/ghost.gd" type="Script" id=15]
-[ext_resource path="res://powerups/medusa.gd" type="Script" id=16]
+[ext_resource path="res://Stages/mon/powerup_effects/ghost.gd" type="Script" id=15]
+[ext_resource path="res://Stages/mon/powerup_effects/medusa.gd" type="Script" id=16]
 [ext_resource path="res://assets/images/sprite_medusa.png" type="Texture" id=17]
-[ext_resource path="res://powerups/bombermon.gd" type="Script" id=18]
-[ext_resource path="res://powerups/horns.gd" type="Script" id=19]
+[ext_resource path="res://Stages/mon/powerup_effects/bombermon.gd" type="Script" id=18]
+[ext_resource path="res://Stages/mon/powerup_effects/horns.gd" type="Script" id=19]
 [ext_resource path="res://assets/images/horns_temp.png" type="Texture" id=20]
-[ext_resource path="res://powerups/spikespowerup.gd" type="Script" id=21]
-[ext_resource path="res://powerups/net.gd" type="Script" id=22]
+[ext_resource path="res://Stages/mon/powerup_effects/spikespowerup.gd" type="Script" id=21]
+[ext_resource path="res://Stages/mon/powerup_effects/net.gd" type="Script" id=22]
 [ext_resource path="res://assets/images/net_temp_icon.png" type="Texture" id=23]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -63,7 +63,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=4]
 
 length = 0.45
-loop = true
+loop = false
 step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -207,7 +207,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=13]
 
 resource/name = "Net"
 length = 0.1
@@ -224,7 +224,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=14]
 
 resource/name = "NetFinish"
 length = 0.1
@@ -241,7 +241,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=15]
 
 length = 0.2
 loop = true
@@ -267,7 +267,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=16]
 
 length = 1.0
 loop = false
@@ -303,7 +303,7 @@ tracks/2/keys = {
 "values": [ 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
 
 length = 0.1
 loop = false
@@ -339,9 +339,8 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=18]
 
-resource/name = "Unfreeze"
 length = 1.0
 loop = false
 step = 0.1
@@ -356,27 +355,29 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="CircleShape2D" id=17]
+[sub_resource type="CircleShape2D" id=19]
 
 custom_solver_bias = 0.0
 radius = 86.5171
 
-[sub_resource type="ColorRamp" id=18]
+[sub_resource type="ColorRamp" id=20]
 
 offsets = FloatArray( 0, 1 )
 colors = ColorArray( 1, 1, 1, 0.889373, 1, 1, 1, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=19]
+[sub_resource type="ConvexPolygonShape2D" id=21]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -7.2802, 0.738338, -7.2802, -7.41796, 0.0907364, -3.34476 )
 
-[sub_resource type="ConvexPolygonShape2D" id=20]
+[sub_resource type="ConvexPolygonShape2D" id=22]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -6.85091, -1.84228, 1.52002, -6.13012, 1.30538, 2.23587 )
 
-[node name="Mon" type="KinematicBody2D"]
+[node name="Mon" type="KinematicBody2D" groups=[
+"players",
+]]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
@@ -419,6 +420,7 @@ script/script = ExtResource( 3 )
 z/z = 1
 texture = ExtResource( 4 )
 hframes = 13
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -474,6 +476,7 @@ script/script = ExtResource( 6 )
 
 [node name="PowerupEffects" type="Node2D" parent="."]
 
+editor/display_folded = true
 script/script = ExtResource( 7 )
 
 [node name="PowerupAnimations" type="AnimationPlayer" parent="PowerupEffects"]
@@ -486,12 +489,12 @@ anims/BombermonAcquire = SubResource( 9 )
 anims/Freeze = SubResource( 10 )
 anims/Horns = SubResource( 11 )
 anims/Medusa = SubResource( 12 )
-anims/Net = SubResource( 21 )
-anims/NetFinish = SubResource( 22 )
-anims/Pepper = SubResource( 13 )
-anims/Rockets = SubResource( 14 )
-anims/RocketsReady = SubResource( 15 )
-anims/Unfreeze = SubResource( 16 )
+anims/Net = SubResource( 13 )
+anims/NetFinish = SubResource( 14 )
+anims/Pepper = SubResource( 15 )
+anims/Rockets = SubResource( 16 )
+anims/RocketsReady = SubResource( 17 )
+anims/Unfreeze = SubResource( 18 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -519,7 +522,7 @@ autostart = false
 
 visibility/visible = false
 input/pickable = true
-shapes/0/shape = SubResource( 17 )
+shapes/0/shape = SubResource( 19 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
@@ -529,7 +532,7 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupEffects/Freeze/Area2D"]
 
-shape = SubResource( 17 )
+shape = SubResource( 19 )
 trigger = true
 _update_shape_index = 0
 
@@ -563,7 +566,7 @@ params/final_size = 1.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-color/color_ramp = SubResource( 18 )
+color/color_ramp = SubResource( 20 )
 
 [node name="RightParticles" type="Particles2D" parent="PowerupEffects/Rockets"]
 
@@ -590,7 +593,7 @@ params/final_size = 1.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-color/color_ramp = SubResource( 18 )
+color/color_ramp = SubResource( 20 )
 
 [node name="BackSprite" type="Sprite" parent="PowerupEffects/Rockets"]
 
@@ -688,7 +691,7 @@ autostart = false
 [node name="Area2D" type="Area2D" parent="PowerupEffects/Bombermon"]
 
 input/pickable = true
-shapes/0/shape = SubResource( 17 )
+shapes/0/shape = SubResource( 19 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
@@ -699,7 +702,7 @@ angular_damp = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupEffects/Bombermon/Area2D"]
 
 visibility/visible = false
-shape = SubResource( 17 )
+shape = SubResource( 19 )
 trigger = true
 _update_shape_index = 0
 
@@ -747,10 +750,10 @@ autostart = false
 
 visibility/visible = false
 input/pickable = true
-shapes/0/shape = SubResource( 19 )
+shapes/0/shape = SubResource( 21 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 21.5371, 10.0149 )
 shapes/0/trigger = true
-shapes/1/shape = SubResource( 20 )
+shapes/1/shape = SubResource( 22 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, -15.1712, 8.72701 )
 shapes/1/trigger = true
 gravity_vec = Vector2( 0, 1 )

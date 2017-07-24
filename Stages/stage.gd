@@ -33,9 +33,7 @@ func _ready():
 		var tex = load("res://assets/images/m_0"+var2str(player.monster)+"_"+player.color+".png")
 		tex.set_flags(0)
 		get_node(node_name+"/Sprite").set_texture(tex)
-		get_node(node_name+"/Trail").set_color(player.color)
-		get_node(node_name+"/Ink").setup(player.color)
-		get_node(node_name).color = player.color
+		get_node(node_name).set_color(player.color)
 		get_node(node_name).connect("on_kill", self, "_on_player_kill")
 		get_node(node_name).connect("on_death", self, "_on_player_death")
 	

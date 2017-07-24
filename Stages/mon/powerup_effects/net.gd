@@ -37,7 +37,7 @@ func net_disappear():
 	if (net != null and not net.is_queued_for_deletion()):
 		net.queue_free()
 
-func _ready():2
-	net_scene = load("res://powerups/Net.tscn")
+func _ready():
+	net_scene = load(get_node("/root/global").powerup_effects_dir+"Net.tscn")
 	get_node("GroundedTimer").connect("timeout", self, "effect_finish")
 	get_node("DurationTimer").connect("timeout", self, "net_disappear")

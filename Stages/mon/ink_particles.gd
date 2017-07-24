@@ -1,8 +1,5 @@
 extends Particles2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 var amarelo = Color(1, 0.78, 0, 1)
 var azul = Color(0, 0.45, 1, 1)
 var verde = Color(0, 0.87, 0.15, 1)

@@ -17,7 +17,7 @@ func game_start():
 			get_node("/root/global").add_player(player+1, p.colors[p.selected_color], p.selected_monster)
 	get_node("/root/global").game_start()
 
-func all_players_ready(all_ready):
+func players_ready(all_ready):
 	if (all_ready):
 		get_node("StartText").show()
 		everyone_ready = true
@@ -33,7 +33,7 @@ func set_join(join, player):
 	else:
 		joined_count -= 1
 		player_joined[player] = false
-	all_players_ready(ready_count == joined_count)
+	players_ready(ready_count == joined_count)
 
 func set_ready(ready, player):
 	get_node("tube"+var2str(player)).set_ready(ready)
@@ -43,7 +43,7 @@ func set_ready(ready, player):
 	else:
 		ready_count -= 1
 		player_ready[player] = false
-	all_players_ready(ready_count == joined_count)
+	players_ready(ready_count == joined_count)
 
 func _input(event):
 	if (everyone_ready): # Check if anyone pressed start
