@@ -5,8 +5,6 @@
 [ext_resource path="res://assets/fonts/bitmaps/nokia.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://CharacterSelection/TestTube.tscn" type="PackedScene" id=4]
 
-
-
 [node name="CharSelect" type="Node2D"]
 
 script/script = ExtResource( 1 )
@@ -51,19 +49,21 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="tube0" parent="." instance=ExtResource( 4 )]
+[node name="Tubes" type="Node2D" parent="."]
+
+[node name="Tube1" parent="Tubes" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 177, 393 )
 
-[node name="tube1" parent="." instance=ExtResource( 4 )]
+[node name="Tube2" parent="Tubes" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 401, 393 )
 
-[node name="tube2" parent="." instance=ExtResource( 4 )]
+[node name="Tube3" parent="Tubes" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 625, 393 )
 
-[node name="tube3" parent="." instance=ExtResource( 4 )]
+[node name="Tube4" parent="Tubes" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 849, 393 )
 

@@ -1,6 +1,7 @@
 extends Node
 
 const MAX_PLAYERS = 4
+const TOTAL_MONSTERS = 5 # Number  of monster types
 const powerup_effects_dir = "res://Stages/mon/powerup_effects/"
 
 # Color strings used by assets

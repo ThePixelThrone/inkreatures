@@ -1,46 +1,27 @@
-[gd_scene load_steps=67 format=1]
+[gd_scene load_steps=27 format=1]
 
 [ext_resource path="res://CharacterSelection/test_tube.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/fundo_selecao.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/spriteparticulaamarela.png" type="Texture" id=3]
 [ext_resource path="res://assets/gfx/join.png" type="Texture" id=4]
-[ext_resource path="res://assets/gfx/ready_amarelo.png" type="Texture" id=5]
-[ext_resource path="res://assets/gfx/ready_azul.png" type="Texture" id=6]
-[ext_resource path="res://assets/gfx/ready_verde.png" type="Texture" id=7]
-[ext_resource path="res://assets/gfx/ready_vermelho.png" type="Texture" id=8]
-[ext_resource path="res://assets/gfx/select_amarelo.png" type="Texture" id=9]
-[ext_resource path="res://assets/gfx/select_azul.png" type="Texture" id=10]
-[ext_resource path="res://assets/images/spriteparticulaazul.png" type="Texture" id=11]
-[ext_resource path="res://assets/gfx/select_verde.png" type="Texture" id=12]
-[ext_resource path="res://assets/images/spriteparticulaverde.png" type="Texture" id=13]
-[ext_resource path="res://assets/gfx/select_vermelho.png" type="Texture" id=14]
-[ext_resource path="res://assets/images/spriteparticulavermelha.png" type="Texture" id=15]
-[ext_resource path="res://assets/images/m_01_amarelo.png" type="Texture" id=16]
-[ext_resource path="res://assets/images/m_02_amarelo.png" type="Texture" id=17]
-[ext_resource path="res://assets/images/m_03_amarelo.png" type="Texture" id=18]
-[ext_resource path="res://assets/images/m_04_amarelo.png" type="Texture" id=19]
-[ext_resource path="res://assets/images/m_05_amarelo.png" type="Texture" id=20]
-[ext_resource path="res://assets/images/m_01_azul.png" type="Texture" id=21]
-[ext_resource path="res://assets/images/m_02_azul.png" type="Texture" id=22]
-[ext_resource path="res://assets/images/m_03_azul.png" type="Texture" id=23]
-[ext_resource path="res://assets/images/m_04_azul.png" type="Texture" id=24]
-[ext_resource path="res://assets/images/m_05_azul.png" type="Texture" id=25]
-[ext_resource path="res://assets/images/m_01_verde.png" type="Texture" id=26]
-[ext_resource path="res://assets/images/m_02_verde.png" type="Texture" id=27]
-[ext_resource path="res://assets/images/m_03_verde.png" type="Texture" id=28]
-[ext_resource path="res://assets/images/m_04_verde.png" type="Texture" id=29]
-[ext_resource path="res://assets/images/m_05_verde.png" type="Texture" id=30]
-[ext_resource path="res://assets/images/m_01_vermelho.png" type="Texture" id=31]
-[ext_resource path="res://assets/images/m_02_vermelho.png" type="Texture" id=32]
-[ext_resource path="res://assets/images/m_03_vermelho.png" type="Texture" id=33]
-[ext_resource path="res://assets/images/m_04_vermelho.png" type="Texture" id=34]
-[ext_resource path="res://assets/images/m_05_vermelho.png" type="Texture" id=35]
-[ext_resource path="res://assets/gfx/p1.png" type="Texture" id=36]
+[ext_resource path="res://assets/images/m_01_amarelo.png" type="Texture" id=5]
+[ext_resource path="res://assets/gfx/ready_amarelo.png" type="Texture" id=6]
+[ext_resource path="res://assets/gfx/ready_azul.png" type="Texture" id=7]
+[ext_resource path="res://assets/gfx/ready_verde.png" type="Texture" id=8]
+[ext_resource path="res://assets/gfx/ready_vermelho.png" type="Texture" id=9]
+[ext_resource path="res://assets/gfx/select_amarelo.png" type="Texture" id=10]
+[ext_resource path="res://assets/gfx/select_azul.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/spriteparticulaazul.png" type="Texture" id=12]
+[ext_resource path="res://assets/gfx/select_verde.png" type="Texture" id=13]
+[ext_resource path="res://assets/images/spriteparticulaverde.png" type="Texture" id=14]
+[ext_resource path="res://assets/gfx/select_vermelho.png" type="Texture" id=15]
+[ext_resource path="res://assets/images/spriteparticulavermelha.png" type="Texture" id=16]
+[ext_resource path="res://assets/gfx/p1.png" type="Texture" id=17]
 
 [sub_resource type="Animation" id=1]
 
 resource/name = "Jump_to_join"
-length = 0.1
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -67,34 +48,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=2]
 
 resource/name = "Ready_amarelo"
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 5 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visibility/visible")
-tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=3]
-
-resource/name = "Ready_blue"
-length = 0.1
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -118,10 +72,10 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 
-resource/name = "Ready_green"
-length = 0.1
+resource/name = "Ready_blue"
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -145,10 +99,10 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 
-resource/name = "Ready_red"
-length = 0.1
+resource/name = "Ready_green"
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -172,10 +126,10 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 
-resource/name = "Select_amarelo"
-length = 0.1
+resource/name = "Ready_red"
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -196,22 +150,13 @@ tracks/1/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Particles2D:config/texture")
-tracks/2/interp = 1
-tracks/2/imported = false
-tracks/2/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 3 ) ]
+"values": [ false ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 
-length = 0.1
+resource/name = "Select_amarelo"
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -242,12 +187,12 @@ tracks/2/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 11 ) ]
+"values": [ ExtResource( 3 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 
-length = 0.1
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -255,36 +200,35 @@ tracks/0/path = NodePath("Tube:texture")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles2D:config/texture")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 12 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visibility/visible")
-tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Particles2D:config/texture")
-tracks/2/interp = 1
-tracks/2/imported = false
-tracks/2/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 13 ) ]
-}
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 
-resource/name = "Select_red"
-length = 0.1
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -295,7 +239,7 @@ tracks/0/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 14 ) ]
+"values": [ ExtResource( 13 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Particles2D:visibility/visible")
@@ -315,349 +259,44 @@ tracks/2/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 15 ) ]
+"values": [ ExtResource( 14 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 
-resource/name = "amarelo1"
-length = 0.1
+resource/name = "Select_red"
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
+tracks/0/path = NodePath("Tube:texture")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 15 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles2D:config/texture")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 16 ) ]
-}
-
-[sub_resource type="Animation" id=11]
-
-resource/name = "amarelo2"
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 17 ) ]
-}
-
-[sub_resource type="Animation" id=12]
-
-resource/name = "amarelo3"
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 18 ) ]
-}
-
-[sub_resource type="Animation" id=13]
-
-resource/name = "amarelo4"
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 19 ) ]
-}
-
-[sub_resource type="Animation" id=14]
-
-resource/name = "amarelo5"
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 20 ) ]
-}
-
-[sub_resource type="Animation" id=15]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 21 ) ]
-}
-
-[sub_resource type="Animation" id=16]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 22 ) ]
-}
-
-[sub_resource type="Animation" id=17]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 23 ) ]
-}
-
-[sub_resource type="Animation" id=18]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 24 ) ]
-}
-
-[sub_resource type="Animation" id=19]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 25 ) ]
-}
-
-[sub_resource type="Animation" id=20]
-
-resource/name = "vanish"
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ null ]
-}
-
-[sub_resource type="Animation" id=21]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 26 ) ]
-}
-
-[sub_resource type="Animation" id=22]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 27 ) ]
-}
-
-[sub_resource type="Animation" id=23]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 28 ) ]
-}
-
-[sub_resource type="Animation" id=24]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 29 ) ]
-}
-
-[sub_resource type="Animation" id=25]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 30 ) ]
-}
-
-[sub_resource type="Animation" id=26]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 31 ) ]
-}
-
-[sub_resource type="Animation" id=27]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 32 ) ]
-}
-
-[sub_resource type="Animation" id=28]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 33 ) ]
-}
-
-[sub_resource type="Animation" id=29]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 34 ) ]
-}
-
-[sub_resource type="Animation" id=30]
-
-length = 0.1
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Tube/Mon:texture")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 35 ) ]
 }
 
 [node name="TestTube" type="Node2D"]
@@ -711,9 +350,10 @@ texture = ExtResource( 4 )
 
 transform/pos = Vector2( 0, 13 )
 transform/scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
 hframes = 13
 
-[node name="TubeAnimation" type="AnimationPlayer" parent="."]
+[node name="Animator" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
@@ -732,37 +372,6 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
-[node name="MonAnimation" type="AnimationPlayer" parent="."]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/amarelo1 = SubResource( 10 )
-anims/amarelo2 = SubResource( 11 )
-anims/amarelo3 = SubResource( 12 )
-anims/amarelo4 = SubResource( 13 )
-anims/amarelo5 = SubResource( 14 )
-anims/azul1 = SubResource( 15 )
-anims/azul2 = SubResource( 16 )
-anims/azul3 = SubResource( 17 )
-anims/azul4 = SubResource( 18 )
-anims/azul5 = SubResource( 19 )
-anims/vanish = SubResource( 20 )
-anims/verde1 = SubResource( 21 )
-anims/verde2 = SubResource( 22 )
-anims/verde3 = SubResource( 23 )
-anims/verde4 = SubResource( 24 )
-anims/verde5 = SubResource( 25 )
-anims/vermelho1 = SubResource( 26 )
-anims/vermelho2 = SubResource( 27 )
-anims/vermelho3 = SubResource( 28 )
-anims/vermelho4 = SubResource( 29 )
-anims/vermelho5 = SubResource( 30 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "Hover"
-
 [node name="PlayerLabel" type="TextureFrame" parent="."]
 
 visibility/visible = false
@@ -774,7 +383,7 @@ margin/left = -35.0
 margin/top = -112.0
 margin/right = 33.0
 margin/bottom = -88.0
-texture = ExtResource( 36 )
+texture = ExtResource( 17 )
 expand = true
 stretch_mode = 0
 

@@ -17,4 +17,3 @@ func _process(delta):
 		if (blink > BLINK_CYCLE):
 			self.show()
 			blink = 0
-	
