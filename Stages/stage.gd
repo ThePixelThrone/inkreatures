@@ -1,12 +1,11 @@
 extends Node2D
 
-const MAX_PLAYERS = 4
 var players
 var not_playing = [1, 2, 3, 4] # Initially no one is playing
 
 var score = [0, 0, 0, 0]
 var players_alive
-var rounds = 3
+var rounds = 3 # Not being used at the moment
 
 func _on_player_kill(player):
 	score[player-1] += 1
@@ -15,11 +14,10 @@ func _on_player_kill(player):
 func _on_player_death(player):
 	players_alive -= 1
 	if (players_alive == 1):
-		OS.set_time_scale(0.4)
+		OS.set_time_scale(0.6)
 		round_finish()
 
-
-func round_finish():
+func round_finish(): # Not implemented yet
 	pass
 
 func _ready():
@@ -41,4 +39,4 @@ func _ready():
 	
 	# Remove unused players
 	for p in not_playing:
-		remove_child(get_node("player"+var2str(p)))
+		get_node("player"+var2str(p)).queue_free()

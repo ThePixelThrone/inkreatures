@@ -6,12 +6,13 @@ var type
 func on_pickup(object):
 	if (object.is_in_group("players")):
 		object.acquire_powerup(type)
-		if (type == powerup_types.HORNS or type == powerup_types.ROCKETS or type == powerup_types.BOMBERMON 
-		or type == powerup_types.MEDUSA or type == powerup_types.PEPPER):
+		if (type == powerup_types.HORNS or type == powerup_types.ROCKETS
+		or type == powerup_types.BOMBERMON or type == powerup_types.MEDUSA
+		or type == powerup_types.PEPPER):
 			object.activate_powerup()
 		queue_free()
 
-func setup():
+func setup(): # Update the sprite and sets up particle colors
 	if (type == powerup_types.FREEZE):
 		get_node("Particles2D").change_color(Color(0.15,1,1,1)) # TODO : número mágico?
 		var tex = load("res://assets/images/freeze.png")
@@ -24,8 +25,10 @@ func setup():
 		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?
 		var tex = load("res://assets/images/espinhos.png")
 		get_node("Sprite").set_texture(tex)
-	elif (type == powerup_types.GOO):
-		pass
+	elif (type == powerup_types.GOO): # NOT IMPLEMENTED
+		get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?
+		var tex = load("res://assets/images/no_sprite.png")
+		get_node("Sprite").set_texture(tex)
 	elif (type == powerup_types.ROCKETS):
 		get_node("Particles2D").change_color(Color(1,0.4,0.4,1)) # TODO : número mágico?
 		var tex = load("res://assets/images/icone_jetpack.png")
@@ -54,7 +57,5 @@ func setup():
 func _ready():
 	powerup_types = get_node("/root/global").powerup_types
 	type = randi()%powerup_types.size()
-	while (type == powerup_types.GOO):
-		type = randi()%powerup_types.size()
 	get_node("Area2D").connect("body_enter", self, "on_pickup")
 	setup()

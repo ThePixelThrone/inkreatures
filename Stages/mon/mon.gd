@@ -9,13 +9,13 @@ const KILL_ANGLE_THRESHOLD = 47
 
 const WALK_FORCE = 800
 const WALK_MIN_SPEED = 10
-const WALK_MAX_SPEED = 200
+const WALK_MAX_SPEED = 220
 const STOP_FORCE = 1200
-const JUMP_SPEED = 590
-const BOUNCE_SPEED = 290
+const JUMP_SPEED = 575
+const BOUNCE_SPEED = 320
 
 const SMASH_BONUS_WALK_FORCE = 1500
-const SMASH_WALK_SPEED = 300
+const SMASH_WALK_SPEED = 330
 const SMASH_SPEED = 900
 const SMASH_GROUNDED_TIME = 0.2 # Keeps player stuck on ground for 0.2 seconds
 

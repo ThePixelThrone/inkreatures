@@ -3,7 +3,7 @@ extends StaticBody2D
 var activated = false
 var timer
 
-func interact(player):
+func interact(player): # Every member of "dynamic_objects" need to implement interact(player)
 	if (player.smashing and not activated):
 		get_node("AnimationPlayer").play("Press")
 		get_node("Spikes1/AnimationPlayer").play("Raise")
