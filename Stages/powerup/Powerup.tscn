@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://Stages/powerup/powerup.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/icone_ghost.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/powerup_particle.png" type="Texture" id=3]
+[ext_resource path="res://Stages/powerup/powerup_particles.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 13, 13 )
+
+[sub_resource type="ColorRamp" id=2]
+
+offsets = FloatArray( 0, 1 )
+colors = ColorArray( 1, 1, 1, 1, 1, 1, 1, 0.225529 )
+
+[node name="Powerup" type="Node2D"]
+
+transform/pos = Vector2( 128, 64 )
+script/script = ExtResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+config/amount = 9
+config/lifetime = 1.0
+config/process_mode = 1
+config/half_extents = Vector2( 12, 12 )
+config/texture = ExtResource( 3 )
+params/direction = 0.0
+params/spread = 0.0
+params/linear_velocity = 0.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 30.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 0.9
+params/final_size = 0.2
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color_ramp = SubResource( 2 )
+script/script = ExtResource( 4 )
+
+
