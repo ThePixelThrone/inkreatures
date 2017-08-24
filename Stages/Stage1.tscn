@@ -116,4 +116,13 @@ transform/pos = Vector2( 640, 512 )
 
 transform/pos = Vector2( 928, 512 )
 
+[node name="EndRoundTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="EndRoundTimer" to="." method="_on_EndRoundTimer_timeout"]
+
 
