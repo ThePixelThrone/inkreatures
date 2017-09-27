@@ -1,9 +1,11 @@
 [gd_scene load_steps=7 format=1]
 
-[ext_resource path="res://Stages/powerup/powerup.gd" type="Script" id=1]
+[ext_resource path="res://objs/powerups/powerup.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/icone_ghost.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/powerup_particle.png" type="Texture" id=3]
-[ext_resource path="res://Stages/powerup/powerup_particles.gd" type="Script" id=4]
+[ext_resource path="res://objs/powerups/powerup_particles.gd" type="Script" id=4]
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

@@ -1,28 +1,41 @@
 [gd_scene load_steps=46 format=1]
 
-[ext_resource path="res://Stages/mon/mon.gd" type="Script" id=1]
+[ext_resource path="res://objs/monster/mon.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=2]
-[ext_resource path="res://Stages/mon/trail.gd" type="Script" id=3]
+[ext_resource path="res://objs/vfx/trail.gd" type="Script" id=3]
 [ext_resource path="res://assets/images/m_01_azul.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/ink_particle_small.png" type="Texture" id=5]
-[ext_resource path="res://Stages/mon/ink_particles.gd" type="Script" id=6]
-[ext_resource path="res://Stages/mon/powerup_effects/powerup_effects.gd" type="Script" id=7]
-[ext_resource path="res://Stages/mon/powerup_effects/freeze.gd" type="Script" id=8]
+[ext_resource path="res://objs/vfx/ink_particles.gd" type="Script" id=6]
+[ext_resource path="res://objs/powerups/powerup_effects.gd" type="Script" id=7]
+[ext_resource path="res://objs/powerups/freeze.gd" type="Script" id=8]
 [ext_resource path="res://assets/images/freeze_effect_temp.png" type="Texture" id=9]
-[ext_resource path="res://Stages/mon/powerup_effects/rockets.gd" type="Script" id=10]
+[ext_resource path="res://objs/powerups/rockets.gd" type="Script" id=10]
 [ext_resource path="res://assets/images/sprite_jetpack_foguetes.png" type="Texture" id=11]
 [ext_resource path="res://assets/images/sprite_jetpack_braco.png" type="Texture" id=12]
-[ext_resource path="res://Stages/mon/powerup_effects/pepper.gd" type="Script" id=13]
+[ext_resource path="res://objs/powerups/pepper.gd" type="Script" id=13]
 [ext_resource path="res://assets/images/flame_smash.png" type="Texture" id=14]
-[ext_resource path="res://Stages/mon/powerup_effects/ghost.gd" type="Script" id=15]
-[ext_resource path="res://Stages/mon/powerup_effects/medusa.gd" type="Script" id=16]
+[ext_resource path="res://objs/powerups/ghost.gd" type="Script" id=15]
+[ext_resource path="res://objs/powerups/medusa.gd" type="Script" id=16]
 [ext_resource path="res://assets/images/sprite_medusa.png" type="Texture" id=17]
-[ext_resource path="res://Stages/mon/powerup_effects/bombermon.gd" type="Script" id=18]
-[ext_resource path="res://Stages/mon/powerup_effects/horns.gd" type="Script" id=19]
+[ext_resource path="res://objs/powerups/bombermon.gd" type="Script" id=18]
+[ext_resource path="res://objs/powerups/horns.gd" type="Script" id=19]
 [ext_resource path="res://assets/images/horns_temp.png" type="Texture" id=20]
-[ext_resource path="res://Stages/mon/powerup_effects/spikespowerup.gd" type="Script" id=21]
-[ext_resource path="res://Stages/mon/powerup_effects/net.gd" type="Script" id=22]
+[ext_resource path="res://objs/powerups/spikespowerup.gd" type="Script" id=21]
+[ext_resource path="res://objs/powerups/net.gd" type="Script" id=22]
 [ext_resource path="res://assets/images/net_temp_icon.png" type="Texture" id=23]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [sub_resource type="CircleShape2D" id=1]
 

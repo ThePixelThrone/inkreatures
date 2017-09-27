@@ -1,9 +1,11 @@
 [gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://CharacterSelection/character_selection.gd" type="Script" id=1]
+[ext_resource path="res://scenes/CharSelect/character_selection.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/background_selecao.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/bitmaps/nokia.fnt" type="BitmapFont" id=3]
-[ext_resource path="res://CharacterSelection/TestTube.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objs/testTube/TestTube.tscn" type="PackedScene" id=4]
+
+
 
 [node name="CharSelect" type="Node2D"]
 

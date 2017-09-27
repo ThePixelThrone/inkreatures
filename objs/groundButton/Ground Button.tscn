@@ -1,7 +1,8 @@
 [gd_scene load_steps=6 format=1]
 
-[ext_resource path="res://Stages/dynamic_objects/ground_button.gd" type="Script" id=1]
+[ext_resource path="res://objs/groundButton/ground_button.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/botao.png" type="Texture" id=2]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

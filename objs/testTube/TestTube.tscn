@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=1]
 
-[ext_resource path="res://CharacterSelection/test_tube.gd" type="Script" id=1]
+[ext_resource path="res://objs/testTube/test_tube.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/fundo_selecao.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/spriteparticulaamarela.png" type="Texture" id=3]
 [ext_resource path="res://assets/gfx/join.png" type="Texture" id=4]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/gfx/select_vermelho.png" type="Texture" id=15]
 [ext_resource path="res://assets/images/spriteparticulavermelha.png" type="Texture" id=16]
 [ext_resource path="res://assets/gfx/p1.png" type="Texture" id=17]
+
 
 [sub_resource type="Animation" id=1]
 

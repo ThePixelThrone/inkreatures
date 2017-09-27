@@ -1,12 +1,18 @@
 [gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://Stages/stage.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Stages/stage.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/level_teste.png" type="Texture" id=2]
-[ext_resource path="res://Stages/dynamic_objects/Ground Button.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Stages/dynamic_objects/Spikes.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Stages/tilesets/tileset1.tres" type="TileSet" id=5]
-[ext_resource path="res://Stages/dynamic_objects/Platform.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Stages/mon/Mon.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objs/groundButton/Ground Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objs/spike/Spikes.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objs/tileset/tileset1.tres" type="TileSet" id=5]
+[ext_resource path="res://objs/platform/Platform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objs/monster/Mon.tscn" type="PackedScene" id=7]
+
+
+
+
+
+
 
 [node name="Stage" type="Node2D"]
 
