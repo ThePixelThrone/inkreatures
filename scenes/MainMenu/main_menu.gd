@@ -8,8 +8,10 @@ const SELECTION_COUNT = 3
 var selected_option = 0
 var cursor_margin = 15
 var cursor_offset
+var gameRootNode
 
 func _ready():
+	gameRootNode = get_node("/root/GameRootNode")
 	set_process_input(true)
 	cursor_offset = Vector2(get_node("cursor").get_size().x + cursor_margin,0)
 	get_node("cursor").set_pos(Vector2(get_node("VBoxContainer/container/play").get_global_pos() - cursor_offset))
@@ -34,8 +36,8 @@ func update_cursor(opt):
 	
 func select(opt):
 	if (opt == PLAY):
-		get_tree().change_scene("res://CharacterSelection/CharacterSelection.tscn")
+		gameRootNode.showScene(gameRootNode.select_scene.instance())
 	elif (opt == OPTIONS):
-		pass
+		gameRootNode.showScene(gameRootNode.options_scene.instance())
 	elif (opt == QUIT):
 		get_tree().quit()

@@ -9,6 +9,7 @@ var ready_count = 0
 var joined_count = 0
 
 var everyone_ready = false
+var gameRootNode
 
 func game_start():
 	for player in range(MAX_PLAYERS):
@@ -78,6 +79,7 @@ func _input(event):
 	
 
 func _ready():
+	gameRootNode = get_node("/root/GameRootNode")
 	var tubes = get_node("Tubes").get_children()
 	var p_num = 1
 	for tube in tubes:

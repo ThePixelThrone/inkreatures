@@ -311,7 +311,7 @@ func net(): # Catched by a Net thrown by another player
 	get_node("PowerupEffects/PowerupAnimations").play("Net")
 
 func _ready():
-	splash_scene = load("res://Stages/mon/splash/Splash.tscn")
+	splash_scene = load("res://objs/splash/Splash.tscn")
 	set_fixed_process(true)
 
 func set_color(color):

@@ -1,0 +1,17 @@
+Inkreatures architecture - 
+
+Game scene -> Root Scene, Globals, scene loading, scene transitions
+/Scenes -> "Full" Scenes
+/Objs -> game objects
+
+------------------------------
+
+
+Start Screen
+
+Play -> Character Selection -> Game -> EndRound -> Game
+										   		-> End Match -> Character Selection
+										   					 -> Game
+
+
+Options -> Options screen -> Controls, Volumes, Fullscreen, Colorbind, etc

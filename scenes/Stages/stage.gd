@@ -6,6 +6,7 @@ var not_playing = [1, 2, 3, 4] # Initially no one is playing
 var score = [0, 0, 0, 0]
 var players_alive
 var rounds = 3 # Not being used at the moment
+var gameRootNode
 
 func _on_player_kill(player):
 	score[player-1] += 1
@@ -21,6 +22,7 @@ func round_finish(): # Not implemented yet
 	pass
 
 func _ready():
+	gameRootNode = get_node("/root/GameRootNode")
 	# Stage configuration
 	# Player setup
 	players = get_node("/root/global").player_list

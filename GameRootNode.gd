@@ -48,4 +48,7 @@ func _process(delta):
 	
 
 func showScene(scene):
+	remove_child(current_scene)
+	current_scene = scene
+	add_child(current_scene)
 	pass
