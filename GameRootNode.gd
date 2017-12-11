@@ -13,6 +13,7 @@ const end_round_scene_path = "res://scenes/EndRound/end_round.tscn"
 const end_game_scene_path = "res://scenes/EndGame/end_game.tscn"
 
 var current_scene = null
+var current_overlay = null
 
 var splash_scene
 var menu_scene
@@ -41,7 +42,7 @@ func _ready():
 	
 	
 func _process(delta):
-	if (current_scene == null):
+	if current_scene == null:
 		current_scene = splash_scene.instance()
 		add_child(current_scene)
 	#Processamento de Input ?
@@ -51,4 +52,10 @@ func showScene(scene):
 	remove_child(current_scene)
 	current_scene = scene
 	add_child(current_scene)
-	pass
+
+func overlayScene(scene):
+	print('overlay scene')
+	if current_overlay != null:
+		remove_child(current_overlay)
+	current_overlay = scene	
+	add_child(scene)

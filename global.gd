@@ -16,6 +16,7 @@ var player_list = []
 var selected_stage = 2
 var game_mode = SURVIVAL
 var gameRootNode
+var input_enabled = true #Mover para o Input Manager
 
 class Player:
 	var number
@@ -24,6 +25,7 @@ class Player:
 
 func _ready():
 	gameRootNode = get_node("/root/GameRootNode")
+	input_enabled = true
 	
 # Called when a player joins the game in the character selection screen
 func add_player(num, color, mon):
@@ -39,4 +41,17 @@ func game_start():
 	if i == 0:
 		gameRootNode.showScene(gameRootNode.stage1_scene.instance())
 	else:	
-		gameRootNode.showScene(gameRootNode.stage1_scene.instance())
+		gameRootNode.showScene(gameRootNode.stage2_scene.instance())
+
+func getNumberOfPlayers():
+	print(gameRootNode.current_scene.get_name())
+	if gameRootNode.current_scene.get_name() == "Stage":
+		return player_list.size()
+	else:
+		return 0
+
+func isPlayerInputEnabled():
+	return input_enabled
+
+func setPlayerInputEnabled(enabled):
+	input_enabled = enabled

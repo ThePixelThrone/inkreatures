@@ -3,7 +3,7 @@ extends Node2D
 var players
 var not_playing = [1, 2, 3, 4] # Initially no one is playing
 
-var score = [0, 0, 0, 0]
+var score = [0, 0, 0, 0] # TODO: keep score from last round
 var players_alive
 var rounds = 3 # Not being used at the moment
 var gameRootNode
@@ -14,12 +14,13 @@ func _on_player_kill(player):
 
 func _on_player_death(player):
 	players_alive -= 1
-	if (players_alive == 1):
+	"""
+	if players_alive == 1:
 		OS.set_time_scale(0.6)
 		round_finish()
-
+	"""
 func round_finish(): # Not implemented yet
-	pass
+	gameRootNode.overlayScene(gameRootNode.end_round_scene.instance())
 
 func _ready():
 	gameRootNode = get_node("/root/GameRootNode")
@@ -42,3 +43,10 @@ func _ready():
 	# Remove unused players
 	for p in not_playing:
 		get_node("player"+var2str(p)).queue_free()
+
+	var timer = Timer.new()
+	timer.connect("timeout",self,"round_finish")
+	timer.set_wait_time(3)
+	timer.set_one_shot(true)
+	add_child(timer)
+	timer.start()
