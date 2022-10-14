@@ -26,6 +26,7 @@ const DEATH_ANIMATION_TIME = 1
 const SLIDE_STOP_VELOCITY = 1.0 # One pixel per second
 const SLIDE_STOP_MIN_TRAVEL = 1.0 # One pixel
 
+onready var initial_scale = scale
 var velocity = Vector2()
 var on_air_time = 100
 
@@ -73,7 +74,7 @@ signal turn_right
 signal player_collision # Emitted on any player collision
 signal surface_collision # Emitted everytime landing on any surface
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	delta *= time_flow
 	
 	# Create forces
@@ -136,47 +137,50 @@ func _fixed_process(delta):
 	# Integrate velocity into motion and move
 	var motion = velocity*delta
 	
+	var collision
 	# Move and consume motion
 	if (not frozen):
-		motion = move(motion)
+		collision = move_and_collide(motion)
 	
 	var floor_velocity = Vector2()
 	
-	if (is_colliding()):
+	# TODO: Reimplement collision w/ 3.5 stuff
+	if (collision):
 		# You can check which tile was collision against with this
 		# print(get_collider_metadata())
-		
+
 		# Ran against something, is it the floor? Get normal and angle
-		var n = get_collision_normal()
+		var n = collision.normal
 		var angle = rad2deg(acos(n.dot(Vector2(0, -1))))
-		
-		if (get_collider().is_in_group("players")): # Player collision
-			if (isAlive and get_collider().isAlive):
-				emit_signal("player_collision", self, get_collider())
+
+		if (collision.collider.is_in_group("players")): # Player collision
+			if (isAlive and collision.collider.isAlive):
+				emit_signal("player_collision", self, collision.collider)
 				if (angle > 180-KILL_ANGLE_THRESHOLD):
-					killed_by_player(get_collider())
+					killed_by_player(collision.collider)
 				elif (angle < KILL_ANGLE_THRESHOLD):
-					get_collider().killed_by_player(self)
-		elif (get_collider().is_in_group("dynamic")):
+					collision.collider.killed_by_player(self)
+		elif (collision.collider.is_in_group("dynamic")):
 			if (isAlive):
-				get_collider().interact(self)
-		elif (get_collider().is_in_group("death_colliders")):
+				collision.collider.interact(self)
+		elif (collision.collider.is_in_group("death_colliders")):
 			if (isAlive):
 				die()
-		
+
 		if (angle < FLOOR_ANGLE_TOLERANCE):
 			# If angle to the "up" vectors is < angle tolerance
 			# char is on floor
 			on_air_time = 0
-			floor_velocity = get_collider_velocity()
+			floor_velocity = collision.collider_velocity
 		elif (angle < 180-KILL_ANGLE_THRESHOLD and not wall_jump):
 			# If angle is in between floor and kill threshold
 			# character has hit a wall
 			wall_jump = true
 			wall_jump_timer = 0
 			num_jumps += 1
-		
-		if (on_air_time == 0 and force.x == 0 and get_travel().length() < SLIDE_STOP_MIN_TRAVEL and abs(velocity.x) < SLIDE_STOP_VELOCITY and get_collider_velocity() == Vector2()):
+
+		# TODO: Not sure what this is about, review it.
+		#if (on_air_time == 0 and force.x == 0 and get_travel().length() < SLIDE_STOP_MIN_TRAVEL and abs(velocity.x) < SLIDE_STOP_VELOCITY and get_collider_velocity() == Vector2()):
 			# Since this formula will always slide the character around, 
 			# a special case must be considered to to stop it from moving 
 			# if standing on an inclined floor. Conditions are:
@@ -184,21 +188,17 @@ func _fixed_process(delta):
 			# 2) Did not move more than one pixel (get_travel().length() < SLIDE_STOP_MIN_TRAVEL)
 			# 3) Not moving horizontally (abs(velocity.x) < SLIDE_STOP_VELOCITY)
 			# 4) Collider is not moving
-			
-			revert_motion()
-			velocity.y = 0.0
-		else:
-			# For every other case of motion, our motion was interrupted.
-			# Try to complete the motion by "sliding" by the normal
-			motion = n.slide(motion)
-			velocity = n.slide(velocity)
-			# Then move again
-			if (not frozen):
-				move(motion)
-	
+
+			#revert_motion()
+			#velocity.y = 0.0
+		#else:
+		# Then move again
+		if (not frozen):
+			velocity = velocity.bounce(collision.normal)
+
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor
-		move(floor_velocity*delta)
+		move_and_slide(floor_velocity*delta)
 	
 	if (isAlive):
 		if (on_air_time == 0): # This means a surface(ground) collision
@@ -207,12 +207,15 @@ func _fixed_process(delta):
 				grounded = true # Sticks player on floor
 				grounded_timer = SMASH_GROUNDED_TIME
 				velocity.x = 0
+				velocity.y = 0
 				get_node("Trail").set_emitting(false)
 				smashing = false
 			if (not grounded): # Only bounces when not grounded
 				velocity.y = -BOUNCE_SPEED
 				num_jumps = 1
 				wall_jump = false
+			else:
+				velocity.y = 0
 			emit_signal("surface_collision")
 		
 		
@@ -238,11 +241,13 @@ func _fixed_process(delta):
 		if (facing_left):
 			if (not prev_facing_left):
 				emit_signal("turn_left")
-				self.set_scale(Vector2(-1, 1))
+				#self.set_scale(Vector2(-1, 1))
+				scale.x = -initial_scale.x * sign(scale.y)
 				prev_facing_left = true
 		elif (prev_facing_left):
 				emit_signal("turn_right")
-				self.set_scale(Vector2(1, 1))
+				#self.set_scale(Vector2(1, 1))
+				scale.x = initial_scale.x * sign(scale.y)
 				prev_facing_left = false
 		
 		# Animation controls
@@ -282,7 +287,7 @@ func die():
 
 func ink_splash(): # Generates an ink splash where player stands
 	var splash = splash_scene.instance()
-	splash.set_pos(get_pos())
+	splash.position = self.position
 	splash.setup(color)
 	get_parent().add_child(splash)
 
@@ -312,7 +317,7 @@ func net(): # Catched by a Net thrown by another player
 
 func _ready():
 	splash_scene = load("res://Stages/mon/splash/Splash.tscn")
-	set_fixed_process(true)
+	set_physics_process(true)
 
 func set_color(color):
 	self.color = color

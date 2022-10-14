@@ -1,86 +1,48 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://InitialGUI/press_start.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/bg_start.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/logo.png" type="Texture" id=3]
-[ext_resource path="res://assets/fonts/bitmaps/nokia.fnt" type="BitmapFont" id=4]
+[ext_resource path="res://assets/fonts/nokia_dynamic.tres" type="DynamicFont" id=4]
 [ext_resource path="res://InitialGUI/blink.gd" type="Script" id=5]
 
 [node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 1024.0
-margin/bottom = 640.0
-script/script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="background" type="TextureFrame" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 1024.0
-margin/bottom = 640.0
+[node name="background" type="TextureRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 640.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
 texture = ExtResource( 2 )
 expand = true
-stretch_mode = 0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_top = 175.0
+margin_right = 1024.0
+margin_bottom = 418.0
 
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 175.0
-margin/right = 1024.0
-margin/bottom = 418.0
-custom_constants/separation = 150
-alignment = 0
-
-[node name="logo" type="TextureFrame" parent="VBoxContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 1024.0
-margin/bottom = 70.0
+[node name="logo" type="TextureRect" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 70.0
 texture = ExtResource( 3 )
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_top = 395.0
+margin_right = 1024.0
+margin_bottom = 418.0
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 220.0
-margin/right = 1024.0
-margin/bottom = 243.0
+[node name="Label" type="Label" parent="VBoxContainer2"]
+margin_right = 1024.0
+margin_bottom = 20.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
 custom_fonts/font = ExtResource( 4 )
 text = "PRESS START"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-script/script = ExtResource( 5 )
-
-
+uppercase = true
+script = ExtResource( 5 )

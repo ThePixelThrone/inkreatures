@@ -12,11 +12,11 @@ const SLIDE_STOP_MIN_TRAVEL = 1.0 # One pixel
 var velocity = Vector2()
 var on_air_time = 100
 
-var owner
+var owner_mon
 
 signal catch
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	# Create forces
 	var force = Vector2(0, GRAVITY)
 	
@@ -27,39 +27,39 @@ func _fixed_process(delta):
 	var motion = velocity*delta
 	
 	# Move and consume motion
-	motion = move(motion)
+	var collision = move_and_collide(motion)
 	
 	var floor_velocity = Vector2()
 	
-	if (is_colliding()):
+	if (collision):
 		# You can check which tile was collision against with this
 		# print(get_collider_metadata())
 		
 		# Ran against something, is it the floor? Get normal and angle
-		var n = get_collision_normal()
+		var n = collision.normal
 		var angle = rad2deg(acos(n.dot(Vector2(0, -1))))
 		
-		if (get_collider().is_in_group("players")):
-			emit_signal("catch", get_collider())
-			if (get_collider() != owner):
-				get_collider().net()
+		if (collision.collider.is_in_group("players")):
+			emit_signal("catch", collision.collider)
+			if (collision.collider != owner_mon):
+				collision.collider.net()
 		
 		if (angle < FLOOR_ANGLE_TOLERANCE):
 			# If angle to the "up" vectors is < angle tolerance
 			# char is on floor
 			on_air_time = 0
-			floor_velocity = get_collider_velocity()
+			floor_velocity = collision.collider_velocity
 	
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor
-		move(floor_velocity*delta)
+		move_and_slide(floor_velocity*delta)
 	
 	on_air_time += delta
 
 func start():
 	velocity.y = -STARTING_VELOCITY
 	velocity.x = 0
-	set_fixed_process(true)
+	set_physics_process(true)
 
 func _ready():
 	pass
