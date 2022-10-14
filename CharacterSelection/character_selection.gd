@@ -50,7 +50,7 @@ func _input(event):
 		for p in range(MAX_PLAYERS):
 			if (event.is_action_pressed("p"+var2str(p+1)+"_start")):
 				game_start()
-	
+
 	for p in range(MAX_PLAYERS):
 		var p_num = var2str(p+1) # Player number string
 		var player_tube = get_node("Tubes/Tube"+p_num)
@@ -75,13 +75,12 @@ func _input(event):
 				set_ready(false, p)
 			elif (player_joined[p]):
 				set_join(false, p)
-	
 
 func _ready():
 	var tubes = get_node("Tubes").get_children()
 	var p_num = 1
 	for tube in tubes:
 		var tex = load("res://assets/gfx/p"+var2str(p_num)+".png")
-		tube.get_node("PlayerLabel").set_texture(tex)
+		tube.get_node("PlayerLabel").texture = tex
 		p_num += 1
 	set_process_input(true)

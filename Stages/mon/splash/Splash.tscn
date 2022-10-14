@@ -1,60 +1,32 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Stages/mon/splash/Splash.gd" type="Script" id=1]
+[ext_resource path="res://Stages/mon/splash/splash.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/splash1.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
-
-resource/name = "Spread"
 length = 0.2
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Splash:scale")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
-"times": FloatArray( 0, 0.2 ),
-"transitions": FloatArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.2, 3.0 ]
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 3, 3 ) ]
 }
 
 [node name="Node2D" type="Node2D"]
-
-script/script = ExtResource( 1 )
+script = ExtResource( 1 )
 
 [node name="Splash" type="Light2D" parent="."]
-
-enabled = true
-editor_only = false
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
-offset = Vector2( 0, 0 )
-scale = 0.2
-color = Color( 1, 1, 1, 1 )
 energy = 2.0
 mode = 2
-range/height = 0.0
-range/z_min = -1024
-range/z_max = 1024
-range/layer_min = 0
-range/layer_max = 0
-range/item_mask = 2
-shadow/enabled = false
-shadow/color = Color( 0, 0, 0, 0 )
-shadow/buffer_size = 2048
-shadow/esm_multiplier = 80.0
-shadow/item_mask = 1
+range_item_cull_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
 anims/Spread = SubResource( 1 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = ""
-
-

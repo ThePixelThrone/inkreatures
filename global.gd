@@ -14,7 +14,7 @@ enum powerup_types {FREEZE, HORNS, SPIKES, GOO, ROCKETS, GHOST, NET, BOMBERMON, 
 
 var player_list = []
 var selected_stage = 2
-var game_mode = SURVIVAL
+var game_mode = game_modes.SURVIVAL
 
 class Player:
 	var number
