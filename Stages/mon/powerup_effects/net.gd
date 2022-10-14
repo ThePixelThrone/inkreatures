@@ -9,10 +9,10 @@ func effect(player):
 	mon = player
 	player.remove_powerup()
 	net = net_scene.instance()
-	var netpos = player.get_pos()
+	var netpos = player.position
 	netpos.y -= 32
-	net.owner = player
-	net.set_pos(netpos)
+	net.owner_mon = player
+	net.position = netpos
 	get_parent().get_parent().get_parent().add_child(net)
 	net.connect("catch", self, "on_catch")
 	net.start()
