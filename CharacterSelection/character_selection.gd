@@ -2,79 +2,96 @@ extends Node2D
 
 const MAX_PLAYERS = 4
 
-var player_joined = [false, false, false, false]
-var player_ready = [false, false, false, false]
+class ConnectedPlayerInfo:
+	func _init(connected_device, joined_tube):
+		device = connected_device
+		tube = joined_tube
+	var ready = false
+	var device = null
+	var tube = null
 
-var ready_count = 0
-var joined_count = 0
+var connected_players = [null, null, null, null]
 
-var everyone_ready = false
+func find_player_by_device(device):
+	for pinfo in connected_players:
+		if (pinfo and pinfo.device == device):
+			return pinfo
+	return null
 
 func game_start():
-	for player in range(MAX_PLAYERS):
-		if (player_ready[player]):
-			var p = get_node("Tubes/Tube"+var2str(player+1))
-			get_node("/root/global").add_player(player+1, p.colors[p.selected_color], p.selected_monster)
+	for index in range(connected_players.size()):
+		var pinfo = connected_players[index]
+		if (pinfo and pinfo.ready):
+			get_node("/root/global").add_player(index+1, pinfo.tube.get_selected_color(), pinfo.tube.selected_monster, pinfo.device)
 	get_node("/root/global").game_start()
 
-func players_ready(all_ready):
-	if (all_ready):
+func all_players_ready():
+	for pinfo in connected_players:
+		if (pinfo and not pinfo.ready):
+			return false
+	return true
+
+func update_players_ready():
+	if (all_players_ready()):
 		get_node("StartText").show()
-		everyone_ready = true
 	else:
 		get_node("StartText").hide()
-		everyone_ready = false
 
-func set_join(join, player):
-	get_node("Tubes/Tube"+var2str(player+1)).join(join)
+func set_join(join, device):
 	if (join):
-		joined_count += 1
-		player_joined[player] = true
+		for i in range(connected_players.size()):
+			if (not connected_players[i]):
+				var tube = get_node("Tubes/Tube"+var2str(i+1))
+				connected_players[i] = ConnectedPlayerInfo.new(device, tube)
+				tube.join(join)
+				break
 	else:
-		joined_count -= 1
-		player_joined[player] = false
-	players_ready(ready_count == joined_count and ready_count > 0)
+		for i in range(connected_players.size()):
+			var pinfo = connected_players[i]
+			if (pinfo and pinfo.device == device):
+				get_node("Tubes/Tube"+var2str(i+1)).join(join)
+				connected_players[i] = null
+	update_players_ready()
 
-func set_ready(ready, player):
-	get_node("Tubes/Tube"+var2str(player+1)).set_ready(ready)
-	if (ready):
-		ready_count += 1
-		player_ready[player] = true
-	else:
-		ready_count -= 1
-		player_ready[player] = false
-	players_ready(ready_count == joined_count and ready_count > 0)
+func set_ready(ready, pinfo):
+	pinfo.ready = ready
+	pinfo.tube.set_ready(ready)
+	update_players_ready()
 
 func _input(event):
-	if (everyone_ready): # Check if anyone pressed start
-		for p in range(MAX_PLAYERS):
-			if (event.is_action_pressed("p"+var2str(p+1)+"_start")):
-				game_start()
+	var devices = get_node("/root/global").devices
+	for pinfo in connected_players:
+		if (pinfo and event.is_action_pressed(pinfo.device+"_start") and all_players_ready()):
+			game_start()
 
-	for p in range(MAX_PLAYERS):
-		var p_num = var2str(p+1) # Player number string
-		var player_tube = get_node("Tubes/Tube"+p_num)
-		if (player_joined[p] and not player_ready[p]):
-			if (event.is_action_pressed("p"+p_num+"_up")):
-				player_tube.next_mon()
-			elif (event.is_action_pressed("p"+p_num+"_down")):
-				player_tube.prev_mon()
-			elif (event.is_action_pressed("p"+p_num+"_left")):
-				player_tube.prev_color()
-			elif (event.is_action_pressed("p"+p_num+"_right")):
-				player_tube.next_color()
-		
-		if (event.is_action_pressed("p"+p_num+"_jump") || event.is_action_pressed("p"+p_num+"_start")):
-			if (not player_ready[p]):
-				if (not player_joined[p]):
-					set_join(true, p)
+	for pinfo in connected_players:
+		if (not pinfo):
+			continue
+		var device = pinfo.device
+		if (not pinfo.ready):
+			if (event.is_action_pressed(device+"_up")):
+				pinfo.tube.next_mon()
+			elif (event.is_action_pressed(device+"_down")):
+				pinfo.tube.prev_mon()
+			elif (event.is_action_pressed(device+"_left")):
+				pinfo.tube.prev_color()
+			elif (event.is_action_pressed(device+"_right")):
+				pinfo.tube.next_color()
+	
+	for device in devices:
+		if (event.is_action_pressed(device+"_jump") || event.is_action_pressed(device+"_start")):
+			var pinfo = find_player_by_device(device)
+			if (not pinfo):
+				set_join(true, device)
+			elif (not pinfo.ready):
+				set_ready(true, pinfo)
+		elif (event.is_action_pressed(device+"_cancel")):
+			var pinfo = find_player_by_device(device)
+			if (pinfo):
+				if (pinfo.ready):
+					set_ready(false, pinfo)
 				else:
-					set_ready(true, p)
-		elif (event.is_action_pressed("p"+p_num+"_cancel")):
-			if (player_ready[p]):
-				set_ready(false, p)
-			elif (player_joined[p]):
-				set_join(false, p)
+					set_join(false, device)
 
 func _ready():
 	var tubes = get_node("Tubes").get_children()

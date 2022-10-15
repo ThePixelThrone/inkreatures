@@ -11,6 +11,8 @@ enum game_modes {SURVIVAL, PIXEL_THRONE, VIRUS, CO_OP}
 
 enum powerup_types {FREEZE, HORNS, SPIKES, GOO, ROCKETS, GHOST, NET, BOMBERMON, MEDUSA, PEPPER}
 
+# Hardcoded for now, will be mapped later
+var devices = ["keyboard", "dev0", "dev1", "dev2", "dev3"]
 
 var player_list = []
 var selected_stage = 2
@@ -20,16 +22,18 @@ class Player:
 	var number
 	var color
 	var monster
+	var controller_device
 
 func _ready():
 	pass
 
 # Called when a player joins the game in the character selection screen
-func add_player(num, color, mon):
+func add_player(num, color, mon, device):
 	var player = Player.new()
 	player.number = num
 	player.color = color
 	player.monster = mon
+	player.controller_device = device
 	player_list.append(player)
 
 func game_start():

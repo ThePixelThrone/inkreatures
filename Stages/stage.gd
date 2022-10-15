@@ -28,6 +28,7 @@ func _ready():
 		not_playing.erase(player.number)
 		var node_name = "player"+var2str(player.number)
 		get_node(node_name).player = player.number
+		get_node(node_name).controller = player.controller_device
 		var tex = load("res://assets/images/m_0"+var2str(player.monster)+"_"+player.color+".png")
 		tex.set_flags(0)
 		get_node(node_name+"/Sprite").set_texture(tex)
