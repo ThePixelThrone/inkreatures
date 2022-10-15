@@ -56,6 +56,7 @@ var facing_left = false
 var wall_jump = false # Used to control if player did a wall jump
 
 var player = 1
+var controller = "keyboard"
 var color = "azul"
 var isAlive = true
 
@@ -81,11 +82,11 @@ func _physics_process(delta):
 	var force = Vector2(0, GRAVITY-upwards_accel)
 	
 	# Reading inputs
-	var walk_left = Input.is_action_pressed("p"+var2str(player)+"_left")
-	var walk_right = Input.is_action_pressed("p"+var2str(player)+"_right")
-	var jump = Input.is_action_pressed("p"+var2str(player)+"_jump")
-	var smash = Input.is_action_pressed("p"+var2str(player)+"_smash")
-	var activate_powerup = Input.is_action_pressed("p"+var2str(player)+"_powerup")
+	var walk_left = Input.is_action_pressed(controller+"_left")
+	var walk_right = Input.is_action_pressed(controller+"_right")
+	var jump = Input.is_action_pressed(controller+"_jump")
+	var smash = Input.is_action_pressed(controller+"_smash")
+	var activate_powerup = Input.is_action_pressed(controller+"_powerup")
 	
 	var stop = true
 	

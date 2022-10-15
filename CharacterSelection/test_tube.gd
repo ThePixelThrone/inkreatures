@@ -36,6 +36,9 @@ func prev_color():
 	animator.play("Select_"+colors[selected_color])
 	update_textures()
 
+func get_selected_color():
+	return colors[selected_color]
+
 func next_mon():
 	selected_monster = (selected_monster%total_monsters)+1
 	update_textures()
