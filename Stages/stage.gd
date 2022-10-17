@@ -14,7 +14,7 @@ func _on_player_kill(player):
 func _on_player_death(player):
 	players_alive -= 1
 	if (players_alive == 1):
-		OS.set_time_scale(0.6)
+		Engine.time_scale = 0.6
 		round_finish()
 
 func round_finish(): # Not implemented yet
