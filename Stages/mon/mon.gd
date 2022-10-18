@@ -196,6 +196,8 @@ func _physics_process(delta):
 		# Then move again
 		if (not frozen):
 			velocity = velocity.bounce(collision.normal)
+			if (not isAlive):
+				velocity = velocity * 0.35
 
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor
