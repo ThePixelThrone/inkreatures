@@ -6,6 +6,7 @@
 extents = Vector2( 39, 3 )
 
 [node name="Platform" type="StaticBody2D"]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 47.9333, 11.9764 )
