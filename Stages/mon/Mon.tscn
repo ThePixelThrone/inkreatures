@@ -570,10 +570,10 @@ align = 1
 valign = 1
 
 [node name="Horns" type="Node2D" parent="PowerupEffects"]
-visible = false
 script = ExtResource( 19 )
 
 [node name="Sprite" type="Sprite" parent="PowerupEffects/Horns"]
+visible = false
 texture = ExtResource( 20 )
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Horns"]
