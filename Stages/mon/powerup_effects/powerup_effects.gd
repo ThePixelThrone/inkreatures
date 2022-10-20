@@ -10,7 +10,8 @@ func effect(player, type):
 	elif (type == powerup_types.SPIKES):
 		get_node("Spikes").effect(player)
 	elif (type == powerup_types.GOO):
-		get_node("Goo").effect(player)
+		pass
+		#get_node("Goo").effect(player)
 	elif (type == powerup_types.ROCKETS):
 		get_node("Rockets").effect(player)
 	elif (type == powerup_types.GHOST):
