@@ -6,8 +6,6 @@ var verde = Color(0, 0.87, 0.15, 1)
 var vermelho = Color(1, 0, 0.19, 1)
 
 func setup(color):
-	# TODO: How to set material color in 3.5?
-	# self.material.color = amarelo
 	if (color == "amarelo"):
 		get_process_material().set_color(amarelo)
 	elif (color == "azul"):
@@ -18,4 +16,6 @@ func setup(color):
 		get_process_material().set_color(vermelho)
 
 func _ready():
-	pass
+	# Not sure if this is the best approach, make a copy to avoid changing everyone
+	var mat = get_process_material().duplicate(true)
+	set_process_material(mat)

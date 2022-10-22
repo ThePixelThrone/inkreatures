@@ -289,7 +289,7 @@ func die():
 
 func ink_splash(): # Generates an ink splash where player stands
 	var splash = splash_scene.instance()
-	splash.position = self.position
+	splash.set_position(self.position)
 	splash.setup(color)
 	get_parent().add_child(splash)
 
