@@ -60,6 +60,7 @@ tracks/1/keys = {
 extents = Vector2( 8, 6 )
 
 [node name="Spikes" type="StaticBody2D" groups=["death_colliders"]]
+collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -14 )

@@ -10,9 +10,9 @@ func effect(player):
 	var spikespos = player.position
 	spikespos.y += 32
 	if (player.facing_left):
-		spikespos.x += 20
+		spikespos.x += 25
 	else:
-		spikespos.x -= 20
+		spikespos.x -= 25
 	spikes.position = spikespos
 	get_parent().get_parent().get_parent().add_child(spikes)
 

@@ -156,10 +156,9 @@ func _physics_process(delta):
 
 		if (collision.collider.is_in_group("players")): # Player collision
 			if (isAlive and collision.collider.isAlive):
-				emit_signal("player_collision", self, collision.collider)
-				if (angle > 180-KILL_ANGLE_THRESHOLD):
+				if (angle > 180-KILL_ANGLE_THRESHOLD or collision.collider.is_in_group("death_colliders")):
 					killed_by_player(collision.collider)
-				elif (angle < KILL_ANGLE_THRESHOLD):
+				if (angle < KILL_ANGLE_THRESHOLD or self.is_in_group("death_colliders")):
 					collision.collider.killed_by_player(self)
 		elif (collision.collider.is_in_group("dynamic")):
 			if (isAlive):
@@ -196,6 +195,8 @@ func _physics_process(delta):
 		# Then move again
 		if (not frozen):
 			velocity = velocity.bounce(collision.normal)
+			if (not isAlive):
+				velocity = velocity * 0.35
 
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor
