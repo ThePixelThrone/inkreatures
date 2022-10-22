@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/images/splash1.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
-length = 0.2
+length = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Node2D/Splash:scale")
 tracks/0/interp = 1
@@ -12,7 +12,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.15 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.2, 0.2 ), Vector2( 3, 3 ) ]
