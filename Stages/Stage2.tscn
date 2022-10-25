@@ -44,13 +44,13 @@ position = Vector2( 544, 160 )
 position = Vector2( 512, 352 )
 
 [node name="player1" parent="." instance=ExtResource( 6 )]
-position = Vector2( 128, 512 )
+position = Vector2( 112, 256 )
 
 [node name="player2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 416, 384 )
+position = Vector2( 912, 256 )
 
 [node name="player3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 608, 384 )
+position = Vector2( 416, 384 )
 
 [node name="player4" parent="." instance=ExtResource( 6 )]
-position = Vector2( 896, 512 )
+position = Vector2( 608, 384 )
