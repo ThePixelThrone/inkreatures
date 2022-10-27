@@ -9,13 +9,14 @@ extents = Vector2( 39, 3 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 47.9333, 11.9764 )
+position = Vector2( 47.9333, 22.9764 )
 scale = Vector2( 1.21523, 1 )
 shape = SubResource( 1 )
 one_way_collision = true
 one_way_collision_margin = 3.9
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 11 )
 scale = Vector2( 1.2, 1 )
 texture = ExtResource( 1 )
 centered = false
