@@ -12,8 +12,7 @@ func disable():
 	self.hide()
 
 func on_pickup(object):
-	if (object.is_in_group("players")):
-		object.acquire_powerup(type)
+	if (object.is_in_group("players") and object.acquire_powerup(type)):
 		if (type == powerup_types.HORNS or type == powerup_types.ROCKETS
 		or type == powerup_types.BOMBERMON or type == powerup_types.MEDUSA
 		or type == powerup_types.PEPPER):
