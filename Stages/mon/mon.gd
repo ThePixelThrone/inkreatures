@@ -294,7 +294,10 @@ func ink_splash(): # Generates an ink splash where player stands
 	get_parent().add_child(splash)
 
 func acquire_powerup(p):
+	if (powerup != null):
+		return false
 	powerup = p
+	return true;
 
 func activate_powerup():
 	if (powerup != null):

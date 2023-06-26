@@ -49,3 +49,6 @@ amount = 9
 process_material = SubResource( 2 )
 texture = ExtResource( 3 )
 script = ExtResource( 4 )
+
+[node name="RespawnTimer" type="Timer" parent="."]
+one_shot = true
