@@ -2,6 +2,14 @@ extends Node2D
 
 var powerup_types
 var type
+export var base_respawn_time = 8
+export var respawn_variance = 4
+
+func disable():
+	get_node("Area2D").disconnect("body_entered", self, "on_pickup")
+	var respawn_time = base_respawn_time + (rand_range(-1, 1) * respawn_variance)
+	get_node("RespawnTimer").start(respawn_time)
+	self.hide()
 
 func on_pickup(object):
 	if (object.is_in_group("players")):
@@ -10,7 +18,7 @@ func on_pickup(object):
 		or type == powerup_types.BOMBERMON or type == powerup_types.MEDUSA
 		or type == powerup_types.PEPPER):
 			object.activate_powerup()
-		queue_free()
+		disable()
 
 func setup(): # Update the sprite and sets up particle colors
 	match type:
@@ -55,9 +63,14 @@ func setup(): # Update the sprite and sets up particle colors
 			var tex = load("res://assets/images/pepper.png")
 			get_node("Sprite").set_texture(tex)
 
-func _ready():
-	powerup_types = get_node("/root/global").powerup_types
+func spawn():
 	randomize()
 	type = randi() % powerup_types.size()
 	get_node("Area2D").connect("body_entered", self, "on_pickup")
 	setup()
+	self.show()
+
+func _ready():
+	powerup_types = get_node("/root/global").powerup_types
+	get_node("RespawnTimer").connect("timeout", self, "spawn")
+	spawn()
