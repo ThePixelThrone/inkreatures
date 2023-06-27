@@ -9,7 +9,7 @@ const colors = ["azul", "vermelho", "verde", "amarelo"]
 
 enum game_modes {SURVIVAL, PIXEL_THRONE, VIRUS, CO_OP}
 
-enum powerup_types {FREEZE, HORNS, SPIKES, GOO, ROCKETS, GHOST, NET, BOMBERMON, MEDUSA, PEPPER}
+enum powerup_types {FREEZE, HORNS, SPIKES, ROCKETS, GHOST, NET, BOMBERMON, MEDUSA, PEPPER}
 
 # Hardcoded for now, will be mapped later
 var devices = ["keyboard", "dev0", "dev1", "dev2", "dev3"]
