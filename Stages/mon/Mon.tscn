@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Stages/mon/mon.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=2]
@@ -165,6 +165,21 @@ angle_random = 0.6
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Freeze/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "FreezeNova"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Freeze/NovaParticles:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -369,6 +384,36 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Gradient" id=33]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=34]
+gradient = SubResource( 33 )
+
+[sub_resource type="Curve" id=31]
+max_value = 1024.0
+_data = [ Vector2( 0, 250.89 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1024 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=32]
+curve = SubResource( 31 )
+
+[sub_resource type="ParticlesMaterial" id=30]
+lifetime_randomness = 0.15
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 330.0
+initial_velocity_random = 0.43
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping_curve = SubResource( 32 )
+scale = 0.12
+color_ramp = SubResource( 34 )
+
+[sub_resource type="StreamTexture" id=35]
+flags = 4
+load_path = "res://.import/freeze.png-e2594f8220102b0a1584e71d73abc928.stex"
+
 [sub_resource type="CircleShape2D" id=19]
 radius = 86.5171
 
@@ -445,6 +490,7 @@ script = ExtResource( 7 )
 anims/Bombermon = SubResource( 8 )
 anims/BombermonAcquire = SubResource( 9 )
 anims/Freeze = SubResource( 10 )
+anims/FreezeNova = SubResource( 29 )
 anims/Horns = SubResource( 11 )
 anims/Medusa = SubResource( 12 )
 anims/Net = SubResource( 13 )
@@ -456,6 +502,17 @@ anims/Unfreeze = SubResource( 18 )
 
 [node name="Freeze" type="Node2D" parent="PowerupEffects"]
 script = ExtResource( 8 )
+
+[node name="NovaParticles" type="Particles2D" parent="PowerupEffects/Freeze"]
+emitting = false
+amount = 250
+lifetime = 0.8
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 30 )
+texture = SubResource( 35 )
 
 [node name="Sprite" type="Sprite" parent="PowerupEffects/Freeze"]
 visible = false
