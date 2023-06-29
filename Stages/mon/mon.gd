@@ -57,7 +57,11 @@ var wall_jump = false # Used to control if player did a wall jump
 
 var player = 1
 var controller = "keyboard"
-var color = "azul"
+var color_map = {"azul": Color(0, 0.45, 1, 1),
+				 "amarelo": Color(1, 0.78, 0, 1),
+				 "verde": Color(0, 0.87, 0.15, 1),
+				 "vermelho": Color(1, 0, 0.19, 1)}
+var color = color_map["azul"]
 var isAlive = true
 
 var time_flow = 1 # Gambiarra pra pepper TODO : fazer direito
@@ -325,7 +329,7 @@ func _ready():
 	splash_scene = load("res://Stages/mon/splash/Splash.tscn")
 	set_physics_process(true)
 
-func set_color(color):
-	self.color = color
-	get_node("Trail").set_color(color)
+func set_color(color_string):
+	color = color_map[color_string]
+	get_node("Trail").set_color(color_string)
 	get_node("Ink").setup(color)
