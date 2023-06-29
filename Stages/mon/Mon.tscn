@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Stages/mon/mon.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=2]
@@ -158,6 +158,18 @@ angle = 19.6
 angle_random = 0.6
 
 [sub_resource type="Animation" id=8]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bombermon/ExplosionParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=9]
 
@@ -442,6 +454,32 @@ damping = 1.0
 scale_curve = SubResource( 28 )
 color_ramp = SubResource( 26 )
 
+[sub_resource type="Gradient" id=37]
+offsets = PoolRealArray( 0, 0.251613, 0.4, 1 )
+colors = PoolColorArray( 1, 0.635742, 0, 1, 0.942871, 0.942871, 0.942871, 1, 0.743652, 0.743652, 0.743652, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=38]
+gradient = SubResource( 37 )
+
+[sub_resource type="Curve" id=39]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=40]
+curve = SubResource( 39 )
+
+[sub_resource type="ParticlesMaterial" id=36]
+lifetime_randomness = 0.5
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 500.0
+initial_velocity_random = 0.7
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 4.0
+scale_curve = SubResource( 40 )
+color_ramp = SubResource( 38 )
+
 [node name="Mon" type="KinematicBody2D" groups=["players"]]
 collision_layer = 2
 collision_mask = 3
@@ -604,6 +642,14 @@ one_shot = true
 
 [node name="Bombermon" type="Node2D" parent="PowerupEffects"]
 script = ExtResource( 18 )
+
+[node name="ExplosionParticles" type="Particles2D" parent="PowerupEffects/Bombermon"]
+emitting = false
+amount = 60
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 36 )
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Bombermon"]
 wait_time = 5.0
