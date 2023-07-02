@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://Stages/mon/mon.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Stages/mon/powerup_effects/spikespowerup.gd" type="Script" id=21]
 [ext_resource path="res://Stages/mon/powerup_effects/net.gd" type="Script" id=22]
 [ext_resource path="res://assets/images/net_temp_icon.png" type="Texture" id=23]
+[ext_resource path="res://assets/images/bombermon_overhead_icon.png" type="Texture" id=24]
 
 [sub_resource type="Gradient" id=23]
 colors = PoolColorArray( 1, 1, 1, 0.207843, 1, 1, 1, 0 )
@@ -619,6 +620,57 @@ scale = 4.0
 scale_curve = SubResource( 40 )
 color_ramp = SubResource( 38 )
 
+[sub_resource type="AtlasTexture" id=43]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 0, 0, 25, 25 )
+
+[sub_resource type="AtlasTexture" id=44]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 25, 0, 25, 25 )
+
+[sub_resource type="AtlasTexture" id=45]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 50, 0, 25, 25 )
+
+[sub_resource type="AtlasTexture" id=46]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 75, 0, 25, 25 )
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 100, 0, 25, 25 )
+
+[sub_resource type="SpriteFrames" id=48]
+animations = [ {
+"frames": [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Gradient" id=50]
+offsets = PoolRealArray( 0, 0.374194, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.615234, 0, 1, 1, 0.380392, 0, 0.243137 )
+
+[sub_resource type="GradientTexture" id=51]
+gradient = SubResource( 50 )
+
+[sub_resource type="ParticlesMaterial" id=49]
+flag_disable_z = true
+direction = Vector3( 0.5, -1, 0 )
+spread = 120.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 60.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.8
+color_ramp = SubResource( 51 )
+
 [node name="Mon" type="KinematicBody2D" groups=["players"]]
 collision_layer = 2
 collision_mask = 3
@@ -802,18 +854,17 @@ one_shot = true
 visible = false
 shape = SubResource( 19 )
 
-[node name="Label" type="Label" parent="PowerupEffects/Bombermon"]
+[node name="OverheadIcon" type="AnimatedSprite" parent="PowerupEffects/Bombermon"]
 visible = false
-anchor_left = 3.0
-anchor_top = 3.0
-anchor_right = 3.0
-anchor_bottom = 3.0
-margin_left = -4.0
-margin_top = -45.0
-custom_colors/font_color = Color( 1, 0.5, 0.5, 1 )
-text = "5"
-align = 1
-valign = 1
+position = Vector2( 0, -28 )
+frames = SubResource( 48 )
+
+[node name="FuseSparks" type="Particles2D" parent="PowerupEffects/Bombermon/OverheadIcon"]
+visible = false
+position = Vector2( 8, -6 )
+amount = 6
+lifetime = 0.15
+process_material = SubResource( 49 )
 
 [node name="Horns" type="Node2D" parent="PowerupEffects"]
 script = ExtResource( 19 )
