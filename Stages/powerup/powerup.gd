@@ -13,7 +13,7 @@ func disable():
 
 func on_pickup(object):
 	if (object.is_in_group("players") and object.acquire_powerup(type)):
-		if (type == powerup_types.HORNS or type == powerup_types.ROCKETS
+		if (type == powerup_types.UNICORN or type == powerup_types.ROCKETS
 		or type == powerup_types.BOMBERMON or type == powerup_types.MEDUSA
 		or type == powerup_types.PEPPER):
 			object.activate_powerup()
@@ -25,9 +25,9 @@ func setup(): # Update the sprite and sets up particle colors
 			get_node("Particles2D").change_color(Color(0.15,1,1,1)) # TODO : número mágico?
 			var tex = load("res://assets/images/freeze.png")
 			get_node("Sprite").set_texture(tex)
-		powerup_types.HORNS:
-			get_node("Particles2D").change_color(Color(0.55,0.3,0.1,1)) # TODO : número mágico?
-			var tex = load("res://assets/images/horns_temp_icon.png")
+		powerup_types.UNICORN:
+			get_node("Particles2D").set_random_colors()
+			var tex = load("res://assets/images/unicorn_powerup.png")
 			get_node("Sprite").set_texture(tex)
 		powerup_types.SPIKES:
 			get_node("Particles2D").change_color(Color(1,1,1,1)) # TODO : número mágico?

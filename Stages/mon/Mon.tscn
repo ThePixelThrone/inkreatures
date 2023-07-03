@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Stages/mon/mon.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rastro_azul.png" type="Texture" id=2]
@@ -18,8 +18,8 @@
 [ext_resource path="res://Stages/mon/powerup_effects/medusa.gd" type="Script" id=16]
 [ext_resource path="res://assets/images/sprite_medusa.png" type="Texture" id=17]
 [ext_resource path="res://Stages/mon/powerup_effects/bombermon.gd" type="Script" id=18]
-[ext_resource path="res://Stages/mon/powerup_effects/horns.gd" type="Script" id=19]
-[ext_resource path="res://assets/images/horns_temp.png" type="Texture" id=20]
+[ext_resource path="res://Stages/mon/powerup_effects/unicorn.gd" type="Script" id=19]
+[ext_resource path="res://assets/images/unicorn_powerup.png" type="Texture" id=20]
 [ext_resource path="res://Stages/mon/powerup_effects/spikespowerup.gd" type="Script" id=21]
 [ext_resource path="res://Stages/mon/powerup_effects/net.gd" type="Script" id=22]
 [ext_resource path="res://assets/images/net_temp_icon.png" type="Texture" id=23]
@@ -136,6 +136,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -257,21 +269,6 @@ tracks/0/keys = {
 resource_name = "FreezeNova"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Freeze/NovaParticles:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=11]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Horns/Sprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -444,6 +441,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("..:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=16]
 tracks/0/type = "value"
@@ -534,6 +543,53 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+
+[sub_resource type="Animation" id=54]
+resource_name = "UnicornLeftFlip"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 180.0, -180.0 ]
+}
+
+[sub_resource type="Animation" id=55]
+resource_name = "UnicornRightFlip"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Unicorn/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Gradient" id=33]
@@ -721,7 +777,6 @@ anims/Bombermon = SubResource( 8 )
 anims/BombermonAcquire = SubResource( 9 )
 anims/Freeze = SubResource( 10 )
 anims/FreezeNova = SubResource( 29 )
-anims/Horns = SubResource( 11 )
 anims/Medusa = SubResource( 12 )
 anims/Net = SubResource( 13 )
 anims/NetFinish = SubResource( 14 )
@@ -730,6 +785,9 @@ anims/RESET = SubResource( 41 )
 anims/Rockets = SubResource( 16 )
 anims/RocketsReady = SubResource( 17 )
 anims/Unfreeze = SubResource( 18 )
+anims/UnicornLeftFlip = SubResource( 54 )
+anims/UnicornRightFlip = SubResource( 55 )
+anims/UnicornStart = SubResource( 11 )
 
 [node name="Freeze" type="Node2D" parent="PowerupEffects"]
 script = ExtResource( 8 )
@@ -866,27 +924,30 @@ amount = 6
 lifetime = 0.15
 process_material = SubResource( 49 )
 
-[node name="Horns" type="Node2D" parent="PowerupEffects"]
+[node name="Unicorn" type="Node2D" parent="PowerupEffects"]
 script = ExtResource( 19 )
 
-[node name="Sprite" type="Sprite" parent="PowerupEffects/Horns"]
+[node name="Sprite" type="Sprite" parent="PowerupEffects/Unicorn"]
 visible = false
+position = Vector2( 7, -14 )
+rotation = -0.261799
+scale = Vector2( 0.8, 0.8 )
+z_index = 1
 texture = ExtResource( 20 )
 
-[node name="DurationTimer" type="Timer" parent="PowerupEffects/Horns"]
+[node name="DurationTimer" type="Timer" parent="PowerupEffects/Unicorn"]
 wait_time = 7.0
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="PowerupEffects/Horns"]
+[node name="Area2D" type="Area2D" parent="PowerupEffects/Unicorn"]
 visible = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PowerupEffects/Horns/Area2D"]
-position = Vector2( 21.5371, 10.0149 )
-polygon = PoolVector2Array( 0.0907364, -3.34476, -7.2802, -7.41796, -7.2802, 0.738338 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PowerupEffects/Unicorn/Area2D"]
+position = Vector2( 9, -10 )
+polygon = PoolVector2Array( 1, 3, 2, -16, -8, 1 )
 
-[node name="CollisionPolygon2D1" type="CollisionPolygon2D" parent="PowerupEffects/Horns/Area2D"]
-position = Vector2( -15.1712, 8.72701 )
-polygon = PoolVector2Array( 1.30538, 2.23587, 1.52002, -6.13012, -6.85091, -1.84228 )
+[node name="FlipCooldown" type="Timer" parent="PowerupEffects/Unicorn"]
+one_shot = true
 
 [node name="Spikes" type="Node2D" parent="PowerupEffects"]
 script = ExtResource( 21 )

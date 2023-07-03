@@ -5,8 +5,8 @@ var powerup_types
 func effect(player, type):
 	if (type == powerup_types.FREEZE):
 		get_node("Freeze").effect(player)
-	elif (type == powerup_types.HORNS):
-		get_node("Horns").effect(player)
+	elif (type == powerup_types.UNICORN):
+		get_node("Unicorn").effect(player)
 	elif (type == powerup_types.SPIKES):
 		get_node("Spikes").effect(player)
 	elif (type == powerup_types.ROCKETS):

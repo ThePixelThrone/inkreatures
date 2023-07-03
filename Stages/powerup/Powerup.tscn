@@ -30,6 +30,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 6 )
 color_ramp = SubResource( 4 )
+hue_variation_random = 1.0
 
 [node name="Powerup" type="Node2D"]
 position = Vector2( 128, 64 )

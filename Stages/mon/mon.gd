@@ -248,13 +248,11 @@ func _physics_process(delta):
 		if (facing_left):
 			if (not prev_facing_left):
 				emit_signal("turn_left")
-				#self.set_scale(Vector2(-1, 1))
-				scale.x = -initial_scale.x * sign(scale.y)
+				scale.x *= -1
 				prev_facing_left = true
 		elif (prev_facing_left):
 				emit_signal("turn_right")
-				#self.set_scale(Vector2(1, 1))
-				scale.x = initial_scale.x * sign(scale.y)
+				scale.x *= -1
 				prev_facing_left = false
 		
 		# Animation controls
@@ -333,3 +331,9 @@ func set_color(color_string):
 	color = color_map[color_string]
 	get_node("Trail").set_color(color_string)
 	get_node("Ink").setup(color)
+
+func front_flip():
+	if (facing_left):
+		get_node("PowerupEffects/PowerupAnimations").play("UnicornLeftFlip")
+	else:
+		get_node("PowerupEffects/PowerupAnimations").play("UnicornRightFlip")
