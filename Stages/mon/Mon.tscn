@@ -8,7 +8,7 @@
 [ext_resource path="res://Stages/mon/ink_particles.gd" type="Script" id=6]
 [ext_resource path="res://Stages/mon/powerup_effects/powerup_effects.gd" type="Script" id=7]
 [ext_resource path="res://Stages/mon/powerup_effects/freeze.gd" type="Script" id=8]
-[ext_resource path="res://assets/images/freeze_effect_temp.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/freeze_effect.png" type="Texture" id=9]
 [ext_resource path="res://Stages/mon/powerup_effects/rockets.gd" type="Script" id=10]
 [ext_resource path="res://assets/images/sprite_jetpack_foguetes.png" type="Texture" id=11]
 [ext_resource path="res://assets/images/sprite_jetpack_braco.png" type="Texture" id=12]
@@ -805,6 +805,7 @@ texture = SubResource( 35 )
 
 [node name="Sprite" type="Sprite" parent="PowerupEffects/Freeze"]
 visible = false
+position = Vector2( 0, -1 )
 z_index = 1
 texture = ExtResource( 9 )
 
