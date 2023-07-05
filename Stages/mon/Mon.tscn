@@ -15,7 +15,7 @@
 [ext_resource path="res://Stages/mon/powerup_effects/pepper.gd" type="Script" id=13]
 [ext_resource path="res://assets/images/flame_smash.png" type="Texture" id=14]
 [ext_resource path="res://Stages/mon/powerup_effects/ghost.gd" type="Script" id=15]
-[ext_resource path="res://Stages/mon/powerup_effects/medusa.gd" type="Script" id=16]
+[ext_resource path="res://Stages/mon/powerup_effects/dash.gd" type="Script" id=16]
 [ext_resource path="res://assets/images/sprite_medusa.png" type="Texture" id=17]
 [ext_resource path="res://Stages/mon/powerup_effects/bombermon.gd" type="Script" id=18]
 [ext_resource path="res://Stages/mon/powerup_effects/unicorn.gd" type="Script" id=19]
@@ -250,6 +250,35 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=9]
 
+[sub_resource type="Animation" id=12]
+resource_name = "Dash"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Dash/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Dash/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
 [sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
@@ -278,34 +307,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
-}
-
-[sub_resource type="Animation" id=12]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Medusa/Sprite:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Medusa/Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -775,9 +776,9 @@ script = ExtResource( 7 )
 [node name="PowerupAnimations" type="AnimationPlayer" parent="PowerupEffects"]
 anims/Bombermon = SubResource( 8 )
 anims/BombermonAcquire = SubResource( 9 )
+anims/Dash = SubResource( 12 )
 anims/Freeze = SubResource( 10 )
 anims/FreezeNova = SubResource( 29 )
-anims/Medusa = SubResource( 12 )
 anims/Net = SubResource( 13 )
 anims/NetFinish = SubResource( 14 )
 anims/Pepper = SubResource( 15 )
@@ -879,17 +880,22 @@ script = ExtResource( 15 )
 wait_time = 3.0
 one_shot = true
 
-[node name="Medusa" type="Node2D" parent="PowerupEffects"]
+[node name="Dash" type="Node2D" parent="PowerupEffects"]
 script = ExtResource( 16 )
 
-[node name="Sprite" type="Sprite" parent="PowerupEffects/Medusa"]
+[node name="Sprite" type="Sprite" parent="PowerupEffects/Dash"]
 visible = false
 position = Vector2( 0, -6 )
 texture = ExtResource( 17 )
 hframes = 4
+frame = 3
 
-[node name="DurationTimer" type="Timer" parent="PowerupEffects/Medusa"]
+[node name="DurationTimer" type="Timer" parent="PowerupEffects/Dash"]
 wait_time = 7.0
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="PowerupEffects/Dash"]
+wait_time = 1.5
 one_shot = true
 
 [node name="Bombermon" type="Node2D" parent="PowerupEffects"]

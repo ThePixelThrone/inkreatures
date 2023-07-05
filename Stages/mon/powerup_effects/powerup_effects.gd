@@ -17,8 +17,8 @@ func effect(player, type):
 		get_node("Net").effect(player)
 	elif (type == powerup_types.BOMBERMON):
 		get_node("Bombermon").effect(player)
-	elif (type == powerup_types.MEDUSA):
-		get_node("Medusa").effect(player)
+	elif (type == powerup_types.DASH):
+		get_node("Dash").effect(player)
 	elif (type == powerup_types.PEPPER):
 		get_node("Pepper").effect(player)
 	pass

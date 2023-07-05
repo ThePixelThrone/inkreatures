@@ -14,7 +14,7 @@ func disable():
 func on_pickup(object):
 	if (object.is_in_group("players") and object.acquire_powerup(type)):
 		if (type == powerup_types.UNICORN or type == powerup_types.ROCKETS
-		or type == powerup_types.BOMBERMON or type == powerup_types.MEDUSA
+		or type == powerup_types.BOMBERMON or type == powerup_types.DASH
 		or type == powerup_types.PEPPER):
 			object.activate_powerup()
 		disable()
@@ -49,7 +49,7 @@ func setup(): # Update the sprite and sets up particle colors
 			get_node("Particles2D").change_color(Color(1,0.4,0.4,1)) # TODO : número mágico?
 			var tex = load("res://assets/images/bombermon_temp.png")
 			get_node("Sprite").set_texture(tex)
-		powerup_types.MEDUSA:
+		powerup_types.DASH:
 			get_node("Particles2D").change_color(Color(0,1,0,1)) # TODO : número mágico?
 			var tex = load("res://assets/images/icone_medusa.png")
 			get_node("Sprite").set_texture(tex)
