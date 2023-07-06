@@ -1,6 +1,8 @@
 extends CanvasLayer
 
-func setup(color):
+func setup(color, size):
+	get_node("Node2D").scale.x *= size
+	get_node("Node2D").scale.y *= size
 	get_node("Node2D/Splash").set_color(color)
 
 func set_position(pos):
