@@ -5,13 +5,10 @@ var powerup_types
 func effect(player, type):
 	if (type == powerup_types.FREEZE):
 		get_node("Freeze").effect(player)
-	elif (type == powerup_types.HORNS):
-		get_node("Horns").effect(player)
+	elif (type == powerup_types.UNICORN):
+		get_node("Unicorn").effect(player)
 	elif (type == powerup_types.SPIKES):
 		get_node("Spikes").effect(player)
-	elif (type == powerup_types.GOO):
-		pass
-		#get_node("Goo").effect(player)
 	elif (type == powerup_types.ROCKETS):
 		get_node("Rockets").effect(player)
 	elif (type == powerup_types.GHOST):
@@ -20,10 +17,12 @@ func effect(player, type):
 		get_node("Net").effect(player)
 	elif (type == powerup_types.BOMBERMON):
 		get_node("Bombermon").effect(player)
-	elif (type == powerup_types.MEDUSA):
-		get_node("Medusa").effect(player)
+	elif (type == powerup_types.DASH):
+		get_node("Dash").effect(player)
 	elif (type == powerup_types.PEPPER):
 		get_node("Pepper").effect(player)
+	elif (type == powerup_types.VIALS):
+		get_node("Vials").effect(player)
 	pass
 
 func _ready():

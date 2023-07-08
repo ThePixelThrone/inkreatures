@@ -7,6 +7,7 @@ func effect(player):
 	mon = player
 	player.remove_powerup()
 	var bodies = get_node("Area2D").get_overlapping_bodies()
+	get_parent().get_node("PowerupAnimations").play("FreezeNova")
 	for body in bodies:
 		if (body.is_in_group("players") and body != player):
 			body.connect("on_death", self, "on_death")

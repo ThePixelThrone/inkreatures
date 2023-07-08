@@ -5,7 +5,7 @@ var mon = null
 func effect(player):
 	mon = player
 	player.remove_powerup()
-	player.time_flow = 1.2
+	player.time_flow = 1.25
 	get_parent().get_node("PowerupAnimations").play("Pepper")
 	get_node("DurationTimer").start()
 

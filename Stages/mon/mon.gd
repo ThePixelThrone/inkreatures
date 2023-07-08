@@ -1,18 +1,19 @@
 extends KinematicBody2D
 
-const GRAVITY = 1280.0 # Pixels/second
+var GRAVITY = 1280.0 # Pixels/second
 
 # Angle in degrees towards either side that the player can consider "floor"
 const FLOOR_ANGLE_TOLERANCE = 40
 # Angle that will kill a player upon contact
 const KILL_ANGLE_THRESHOLD = 47
 
-const WALK_FORCE = 800
+var WALK_FORCE = 800
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 220
 const STOP_FORCE = 1200
 const JUMP_SPEED = 575
 const BOUNCE_SPEED = 320
+var bounce_factor = 0
 
 const SMASH_BONUS_WALK_FORCE = 1500
 const SMASH_WALK_SPEED = 330
@@ -57,7 +58,11 @@ var wall_jump = false # Used to control if player did a wall jump
 
 var player = 1
 var controller = "keyboard"
-var color = "azul"
+var color_map = {"azul": Color(0, 0.45, 1, 1),
+				 "amarelo": Color(1, 0.78, 0, 1),
+				 "verde": Color(0, 0.87, 0.15, 1),
+				 "vermelho": Color(1, 0, 0.19, 1)}
+var color = color_map["azul"]
 var isAlive = true
 
 var time_flow = 1 # Gambiarra pra pepper TODO : fazer direito
@@ -156,6 +161,7 @@ func _physics_process(delta):
 
 		if (collision.collider.is_in_group("players")): # Player collision
 			if (isAlive and collision.collider.isAlive):
+				emit_signal("player_collision", self, collision.collider)
 				if (angle > 180-KILL_ANGLE_THRESHOLD or collision.collider.is_in_group("death_colliders")):
 					killed_by_player(collision.collider)
 				if (angle < KILL_ANGLE_THRESHOLD or self.is_in_group("death_colliders")):
@@ -206,14 +212,16 @@ func _physics_process(delta):
 		if (on_air_time == 0): # This means a surface(ground) collision
 			if (smashing):
 				# Ends smashing because player has hit a surface
-				grounded = true # Sticks player on floor
-				grounded_timer = SMASH_GROUNDED_TIME
-				velocity.x = 0
-				velocity.y = 0
 				get_node("Trail").set_emitting(false)
 				smashing = false
+				# Sticks player on floor if not bouncing
+				if (bounce_factor < 0.01):
+					grounded = true
+					grounded_timer = SMASH_GROUNDED_TIME
+					velocity.x = 0
+					velocity.y = 0
 			if (not grounded): # Only bounces when not grounded
-				velocity.y = -BOUNCE_SPEED
+				velocity.y = min(-BOUNCE_SPEED, velocity.y*bounce_factor)
 				num_jumps = 1
 				wall_jump = false
 			else:
@@ -243,13 +251,11 @@ func _physics_process(delta):
 		if (facing_left):
 			if (not prev_facing_left):
 				emit_signal("turn_left")
-				#self.set_scale(Vector2(-1, 1))
-				scale.x = -initial_scale.x * sign(scale.y)
+				scale.x *= -1
 				prev_facing_left = true
 		elif (prev_facing_left):
 				emit_signal("turn_right")
-				#self.set_scale(Vector2(1, 1))
-				scale.x = initial_scale.x * sign(scale.y)
+				scale.x *= -1
 				prev_facing_left = false
 		
 		# Animation controls
@@ -290,7 +296,7 @@ func die():
 func ink_splash(): # Generates an ink splash where player stands
 	var splash = splash_scene.instance()
 	splash.set_position(self.position)
-	splash.setup(color)
+	splash.setup(color, abs(scale.y))
 	get_parent().add_child(splash)
 
 func acquire_powerup(p):
@@ -324,7 +330,13 @@ func _ready():
 	splash_scene = load("res://Stages/mon/splash/Splash.tscn")
 	set_physics_process(true)
 
-func set_color(color):
-	self.color = color
-	get_node("Trail").set_color(color)
+func set_color(color_string):
+	color = color_map[color_string]
+	get_node("Trail").set_color(color_string)
 	get_node("Ink").setup(color)
+
+func front_flip():
+	if (facing_left):
+		get_node("PowerupEffects/PowerupAnimations").play("UnicornLeftFlip")
+	else:
+		get_node("PowerupEffects/PowerupAnimations").play("UnicornRightFlip")
