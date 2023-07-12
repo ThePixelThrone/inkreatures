@@ -98,6 +98,7 @@ func _physics_process(delta):
 	
 	if (not isAlive and not get_node("AnimationPlayer").is_playing()):
 		get_parent().queue_respawn(self)
+		return
 	
 	if (grounded):
 		grounded_timer -= delta
@@ -299,6 +300,10 @@ func ink_splash(): # Generates an ink splash where player stands
 	splash.set_position(self.position)
 	splash.setup(color, abs(scale.y))
 	get_parent().add_child(splash)
+	var ink = get_node("Ink").duplicate()
+	ink.set_position(get_node("Ink").to_global(ink.get_position()))
+	get_parent().add_child(ink)
+	ink.set_emitting(true)
 
 func acquire_powerup(p):
 	if (powerup != null):

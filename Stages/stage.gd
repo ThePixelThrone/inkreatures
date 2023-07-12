@@ -25,12 +25,14 @@ func _on_player_death(player):
 func queue_respawn(mon):
 	if mon.stocks > 0:
 		mon.stocks -= 1
-		mon.set_physics_process(false)
 		remove_child(mon)
 		yield(get_tree().create_timer(1.5), "timeout")
 		mon.isAlive = true
-		mon.set_physics_process(true)
 		add_child(mon)
+		# For some weird reason, after playing bombermon animation _ready isn't called
+		# Call it manually
+		mon._ready()
+		mon.set_physics_process(true)
 		mon.get_node("PowerupEffects/Ghost").effect(mon)
 	else:
 		mon.queue_free()

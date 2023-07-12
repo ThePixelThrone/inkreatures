@@ -43,6 +43,7 @@ func effect(player):
 	tag_player(player, timer_duration)
 
 func effect_finish():
+	mon.disconnect("player_collision", self, "on_collision")
 	var bodies = get_node("Area2D").get_overlapping_bodies()
 	display_overhead_icon(false)
 	for body in bodies:
@@ -50,6 +51,7 @@ func effect_finish():
 			body.killed_by_player(mon)
 	mon.die()
 	get_parent().get_node("PowerupAnimations").play("Bombermon")
+	get_node("DurationTimer").stop()
 
 func _process(delta):
 	if (!get_node("DurationTimer").is_stopped()):
