@@ -13,6 +13,7 @@ func effect(player):
 		state = states.ON
 		mon = player
 		player.connect("surface_collision", self, "landed")
+		player.connect("on_death", self, "effect_finish")
 		player.connect("on_jump", self, "on_jump")
 		get_parent().get_node("PowerupAnimations").play("RocketsReady")
 		get_node("DurationTimer").start()

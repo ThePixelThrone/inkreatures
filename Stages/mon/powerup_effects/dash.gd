@@ -9,6 +9,7 @@ func dash():
 func effect(player):
 	if (mon == null):
 		mon = player
+		mon.connect("on_death", self, "effect_finish")
 		get_parent().get_node("PowerupAnimations").play("Dash")
 		get_node("DurationTimer").start()
 	elif (get_node("DashCooldown").is_stopped()):

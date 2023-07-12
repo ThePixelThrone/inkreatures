@@ -8,6 +8,7 @@ var shrinking = false
 func effect(player):
 	if (mon == null):
 		mon = player
+		mon.connect("on_death", self, "effect_finish")
 		type = randi() % vial_types.size()
 		type = vial_types.SHRINK
 		match type:
