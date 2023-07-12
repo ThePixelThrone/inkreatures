@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/images/light.png" type="Texture" id=1]
+[ext_resource path="res://assets/gfx/background_selecao.png" type="Texture" id=2]
+[ext_resource path="res://Stages/mon/Mon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Stages/scoreboard/scoreboard.gd" type="Script" id=4]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/background_selecao.png-b4e67f2869afde4688af4749c21774d2.stex"
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1025, 32 )
+
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/background_menu.png-57c1aa95fba35088cb3f96352a158387.stex"
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="B1" type="TextureRect" parent="."]
+margin_top = 400.0
+margin_right = 2050.0
+margin_bottom = 880.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = SubResource( 1 )
+stretch_mode = 2
+
+[node name="Floor" type="StaticBody2D" parent="B1"]
+position = Vector2( 0, 416 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="B1/Floor"]
+position = Vector2( 1025, 32 )
+shape = SubResource( 3 )
+
+[node name="B2" type="TextureRect" parent="."]
+margin_top = 170.0
+margin_right = 2050.0
+margin_bottom = 650.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="Floor" type="StaticBody2D" parent="B2"]
+position = Vector2( 0, 416 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="B2/Floor"]
+position = Vector2( 1025, 32 )
+shape = SubResource( 3 )
+
+[node name="B3" type="TextureRect" parent="."]
+modulate = Color( 0.227451, 0.14902, 0.14902, 1 )
+margin_top = -60.0
+margin_right = 2050.0
+margin_bottom = 421.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = SubResource( 2 )
+stretch_mode = 2
+
+[node name="Spotlight1" type="Light2D" parent="B3"]
+visible = false
+position = Vector2( 260, 240 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+texture_scale = 0.8
+color = Color( 1, 0.505882, 0.505882, 1 )
+energy = 2.2
+
+[node name="Spotlight2" type="Light2D" parent="B3"]
+visible = false
+position = Vector2( 740, 240 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+texture_scale = 0.8
+color = Color( 1, 0.505882, 0.505882, 1 )
+energy = 2.2
+
+[node name="Spotlight3" type="Light2D" parent="B3"]
+visible = false
+position = Vector2( 1220, 240 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+texture_scale = 0.8
+color = Color( 1, 0.505882, 0.505882, 1 )
+energy = 2.2
+
+[node name="Spotlight4" type="Light2D" parent="B3"]
+visible = false
+position = Vector2( 1746, 240 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+texture_scale = 0.8
+color = Color( 1, 0.505882, 0.505882, 1 )
+energy = 2.2
+
+[node name="Floor" type="StaticBody2D" parent="B3"]
+position = Vector2( 0, 416 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="B3/Floor"]
+position = Vector2( 1025, 32 )
+shape = SubResource( 3 )
+
+[node name="player1" parent="." instance=ExtResource( 3 )]
+position = Vector2( 130, 520 )
+
+[node name="player2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 370, 520 )
+
+[node name="player3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 610, 520 )
+
+[node name="player4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 873, 520 )

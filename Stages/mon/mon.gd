@@ -56,7 +56,7 @@ var facing_left = false
 
 var wall_jump = false # Used to control if player did a wall jump
 
-var player = 1
+var player = null
 var controller = "keyboard"
 var color_map = {"azul": Color(0, 0.45, 1, 1),
 				 "amarelo": Color(1, 0.78, 0, 1),
