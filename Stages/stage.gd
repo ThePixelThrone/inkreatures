@@ -28,6 +28,7 @@ func queue_respawn(mon):
 		remove_child(mon)
 		yield(get_tree().create_timer(1.5), "timeout")
 		mon.isAlive = true
+		mon.set_position(mon.spawn_point)
 		add_child(mon)
 		# For some weird reason, after playing bombermon animation _ready isn't called
 		# Call it manually
@@ -56,6 +57,7 @@ func _ready():
 		var node_name = "player"+var2str(player.number)
 		get_node(node_name).player = player.number
 		get_node(node_name).controller = player.controller_device
+		get_node(node_name).spawn_point = get_node(node_name).get_position()
 		var tex = load("res://assets/images/m_0"+var2str(player.monster)+"_"+player.color+".png")
 		tex.set_flags(0)
 		get_node(node_name+"/Sprite").set_texture(tex)

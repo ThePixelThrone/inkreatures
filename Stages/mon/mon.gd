@@ -28,6 +28,8 @@ const SLIDE_STOP_VELOCITY = 1.0 # One pixel per second
 const SLIDE_STOP_MIN_TRAVEL = 1.0 # One pixel
 
 onready var initial_scale = scale
+var spawn_point
+
 var velocity = Vector2()
 var on_air_time = 100
 
