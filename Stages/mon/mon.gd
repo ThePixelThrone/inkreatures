@@ -64,6 +64,7 @@ var color_map = {"azul": Color(0, 0.45, 1, 1),
 				 "vermelho": Color(1, 0, 0.19, 1)}
 var color = color_map["azul"]
 var isAlive = true
+var stocks = 2
 
 var time_flow = 1 # Gambiarra pra pepper TODO : fazer direito
 var upwards_accel = 0 # Used for power-ups
@@ -96,7 +97,7 @@ func _physics_process(delta):
 	var stop = true
 	
 	if (not isAlive and not get_node("AnimationPlayer").is_playing()):
-		queue_free()
+		get_parent().queue_respawn(self)
 	
 	if (grounded):
 		grounded_timer -= delta
@@ -328,6 +329,8 @@ func net(): # Catched by a Net thrown by another player
 
 func _ready():
 	splash_scene = load("res://Stages/mon/splash/Splash.tscn")
+	get_node("AnimationPlayer").play("RESET")
+	get_node("PowerupEffects/PowerupAnimations").play("RESET")
 	set_physics_process(true)
 
 func set_color(color_string):

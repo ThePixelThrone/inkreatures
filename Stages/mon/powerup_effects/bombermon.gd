@@ -44,7 +44,6 @@ func effect(player):
 
 func effect_finish():
 	var bodies = get_node("Area2D").get_overlapping_bodies()
-	set_process(false)
 	display_overhead_icon(false)
 	for body in bodies:
 		if (body.is_in_group("players") and body != mon):

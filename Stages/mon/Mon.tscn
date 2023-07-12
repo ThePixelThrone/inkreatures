@@ -211,6 +211,7 @@ angle = 19.6
 angle_random = 0.6
 
 [sub_resource type="Animation" id=8]
+length = 0.1
 step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath("Bombermon/ExplosionParticles:emitting")
@@ -777,6 +778,7 @@ shape = SubResource( 1 )
 emitting = false
 amount = 35
 lifetime = 2.0
+one_shot = true
 explosiveness = 0.93
 local_coords = false
 process_material = SubResource( 20 )

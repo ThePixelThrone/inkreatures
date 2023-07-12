@@ -14,13 +14,26 @@ func _on_player_death(player):
 	var winner = null
 	var alive_count = 0
 	for n in player_nodes:
-		if n.isAlive:
+		if n.isAlive or n.stocks > 0:
 			alive_count += 1
 			winner = n
 	if alive_count == 1:
 		round_finish(winner.player)
 	elif alive_count == 0:
 		round_finish(player)
+
+func queue_respawn(mon):
+	if mon.stocks > 0:
+		mon.stocks -= 1
+		mon.set_physics_process(false)
+		remove_child(mon)
+		yield(get_tree().create_timer(1.5), "timeout")
+		mon.isAlive = true
+		mon.set_physics_process(true)
+		add_child(mon)
+		mon.get_node("PowerupEffects/Ghost").effect(mon)
+	else:
+		mon.queue_free()
 
 func round_finish(winner):
 	if round_finished:
