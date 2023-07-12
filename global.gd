@@ -23,6 +23,8 @@ class Player:
 	var color
 	var monster
 	var controller_device
+	var kills = 0
+	var score = 0
 
 func _ready():
 	pass
@@ -38,3 +40,14 @@ func add_player(num, color, mon, device):
 
 func game_start():
 	get_tree().change_scene("res://Stages/Stage"+var2str(selected_stage)+".tscn")
+	selected_stage = 1 + randi() % 2
+
+func increase_kill_count(pnum):
+	for p in player_list:
+		if p.number == pnum:
+			p.kills = p.kills + 1
+
+func increase_player_score(pnum):
+	for p in player_list:
+		if p.number == pnum:
+			p.score = p.score + 1

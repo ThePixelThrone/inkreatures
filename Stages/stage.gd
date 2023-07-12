@@ -3,22 +3,34 @@ extends Node2D
 var players
 var not_playing = [1, 2, 3, 4] # Initially no one is playing
 
-var score = [0, 0, 0, 0]
 var players_alive
-var rounds = 3 # Not being used at the moment
+var round_finished = false
 
 func _on_player_kill(player):
-	score[player-1] += 1
-	print(score[player-1])
+	get_node("/root/global").increase_kill_count(player)
 
 func _on_player_death(player):
-	players_alive -= 1
-	if (players_alive == 1):
-		Engine.time_scale = 0.6
-		round_finish()
+	var player_nodes = get_tree().get_nodes_in_group("players")
+	var winner = null
+	var alive_count = 0
+	for n in player_nodes:
+		if n.isAlive:
+			alive_count += 1
+			winner = n
+	if alive_count == 1:
+		round_finish(winner.player)
+	elif alive_count == 0:
+		round_finish(player)
 
-func round_finish(): # Not implemented yet
-	pass
+func round_finish(winner):
+	if round_finished:
+		return
+	round_finished = true
+	get_node("/root/global").increase_player_score(winner)
+	Engine.time_scale = 0.6
+	yield(get_tree().create_timer(2), "timeout")
+	Engine.time_scale = 1
+	get_tree().change_scene("res://Stages/scoreboard/Scoreboard.tscn")
 
 func _ready():
 	# Stage configuration
