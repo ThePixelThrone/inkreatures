@@ -336,6 +336,9 @@ func _ready():
 	splash_scene = load("res://Stages/mon/splash/Splash.tscn")
 	get_node("AnimationPlayer").play("RESET")
 	get_node("PowerupEffects/PowerupAnimations").play("RESET")
+	facing_left = false
+	prev_facing_left = false
+	set_scale(Vector2(1,1))
 	set_physics_process(true)
 
 func set_color(color_string):
