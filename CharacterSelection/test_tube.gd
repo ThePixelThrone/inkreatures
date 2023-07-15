@@ -9,9 +9,11 @@ var selected_monster = 1
 var animator
 var mon_sprite
 
-func join(joined):
+func join(joined, mon, color):
 	if (joined):
 		get_node("PlayerLabel").show()
+		if color != null: selected_color = color
+		if mon != null: selected_monster = mon
 		animator.play("Select_"+colors[selected_color])
 		update_textures()
 		mon_sprite.show()

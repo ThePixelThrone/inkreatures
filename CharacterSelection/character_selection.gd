@@ -22,7 +22,7 @@ func game_start():
 	for index in range(connected_players.size()):
 		var pinfo = connected_players[index]
 		if (pinfo and pinfo.ready):
-			get_node("/root/global").add_player(index+1, pinfo.tube.get_selected_color(), pinfo.tube.selected_monster, pinfo.device)
+			get_node("/root/global").add_player(index, pinfo.tube.get_selected_color(), pinfo.tube.selected_monster, pinfo.device)
 	get_node("/root/global").game_start()
 
 func all_players_ready():
@@ -37,19 +37,19 @@ func update_players_ready():
 	else:
 		get_node("StartText").hide()
 
-func set_join(join, device):
+func set_join(join, device, selected_mon, selected_color):
 	if (join):
 		for i in range(connected_players.size()):
 			if (not connected_players[i]):
 				var tube = get_node("Tubes/Tube"+var2str(i+1))
 				connected_players[i] = ConnectedPlayerInfo.new(device, tube)
-				tube.join(join)
+				tube.join(join, selected_mon, selected_color)
 				break
 	else:
 		for i in range(connected_players.size()):
 			var pinfo = connected_players[i]
 			if (pinfo and pinfo.device == device):
-				get_node("Tubes/Tube"+var2str(i+1)).join(join)
+				get_node("Tubes/Tube"+var2str(i+1)).join(join, null, null)
 				connected_players[i] = null
 	update_players_ready()
 
@@ -82,7 +82,7 @@ func _input(event):
 		if (event.is_action_pressed(device+"_jump") || event.is_action_pressed(device+"_start")):
 			var pinfo = find_player_by_device(device)
 			if (not pinfo):
-				set_join(true, device)
+				set_join(true, device, null, null)
 			elif (not pinfo.ready):
 				set_ready(true, pinfo)
 		elif (event.is_action_pressed(device+"_cancel")):
@@ -91,7 +91,7 @@ func _input(event):
 				if (pinfo.ready):
 					set_ready(false, pinfo)
 				else:
-					set_join(false, device)
+					set_join(false, device, null, null)
 
 func _ready():
 	var tubes = get_node("Tubes").get_children()
@@ -100,4 +100,8 @@ func _ready():
 		var tex = load("res://assets/gfx/p"+var2str(p_num)+".png")
 		tube.get_node("PlayerLabel").texture = tex
 		p_num += 1
+	var players = get_node("/root/global").player_list
+	var colors = get_node("/root/global").colors
+	for p in players:
+		set_join(true, p.controller_device, p.monster, colors.find(p.color))
 	set_process_input(true)
