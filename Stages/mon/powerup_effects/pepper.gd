@@ -7,6 +7,7 @@ func effect(player):
 	player.remove_powerup()
 	player.time_flow = 1.25
 	get_parent().get_node("PowerupAnimations").play("Pepper")
+	mon.connect("on_death", self, "effect_finish")
 	get_node("DurationTimer").start()
 
 func effect_finish():

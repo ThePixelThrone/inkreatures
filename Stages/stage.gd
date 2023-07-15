@@ -14,13 +14,29 @@ func _on_player_death(player):
 	var winner = null
 	var alive_count = 0
 	for n in player_nodes:
-		if n.isAlive:
+		if n.isAlive or n.stocks > 0:
 			alive_count += 1
 			winner = n
 	if alive_count == 1:
 		round_finish(winner.player)
 	elif alive_count == 0:
 		round_finish(player)
+
+func queue_respawn(mon):
+	if mon.stocks > 0:
+		mon.stocks -= 1
+		remove_child(mon)
+		yield(get_tree().create_timer(1.5), "timeout")
+		mon.isAlive = true
+		mon.set_position(mon.spawn_point)
+		add_child(mon)
+		# For some weird reason, after playing bombermon animation _ready isn't called
+		# Call it manually
+		mon._ready()
+		mon.set_physics_process(true)
+		mon.get_node("PowerupEffects/Ghost").effect(mon)
+	else:
+		mon.queue_free()
 
 func round_finish(winner):
 	if round_finished:
@@ -41,6 +57,7 @@ func _ready():
 		var node_name = "player"+var2str(player.number)
 		get_node(node_name).player = player.number
 		get_node(node_name).controller = player.controller_device
+		get_node(node_name).spawn_point = get_node(node_name).get_position()
 		var tex = load("res://assets/images/m_0"+var2str(player.monster)+"_"+player.color+".png")
 		tex.set_flags(0)
 		get_node(node_name+"/Sprite").set_texture(tex)

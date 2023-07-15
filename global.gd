@@ -25,18 +25,23 @@ class Player:
 	var controller_device
 	var kills = 0
 	var score = 0
+	var win_count = 0
 
 func _ready():
 	pass
 
 # Called when a player joins the game in the character selection screen
-func add_player(num, color, mon, device):
-	var player = Player.new()
-	player.number = num
+func add_player(index, color, mon, device):
+	var player
+	if index > player_list.size()-1:
+		player = Player.new()
+		player_list.append(player)
+	else:
+		player = player_list[index]
+	player.number = index+1
 	player.color = color
 	player.monster = mon
 	player.controller_device = device
-	player_list.append(player)
 
 func game_start():
 	get_tree().change_scene("res://Stages/Stage"+var2str(selected_stage)+".tscn")
@@ -51,3 +56,7 @@ func increase_player_score(pnum):
 	for p in player_list:
 		if p.number == pnum:
 			p.score = p.score + 1
+
+func reset_player_scores():
+	for p in player_list:
+		p.score = 0

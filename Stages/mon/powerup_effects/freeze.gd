@@ -26,6 +26,7 @@ func on_death(player):
 	for p in affected:
 		if (p.player == player):
 			p.disconnect("on_death", self, "on_death")
+			p.unfreeze()
 			affected.erase(p)
 
 func _ready():

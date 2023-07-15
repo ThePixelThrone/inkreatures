@@ -28,6 +28,8 @@ const SLIDE_STOP_VELOCITY = 1.0 # One pixel per second
 const SLIDE_STOP_MIN_TRAVEL = 1.0 # One pixel
 
 onready var initial_scale = scale
+var spawn_point
+
 var velocity = Vector2()
 var on_air_time = 100
 
@@ -64,6 +66,7 @@ var color_map = {"azul": Color(0, 0.45, 1, 1),
 				 "vermelho": Color(1, 0, 0.19, 1)}
 var color = color_map["azul"]
 var isAlive = true
+var stocks = 2
 
 var time_flow = 1 # Gambiarra pra pepper TODO : fazer direito
 var upwards_accel = 0 # Used for power-ups
@@ -96,7 +99,8 @@ func _physics_process(delta):
 	var stop = true
 	
 	if (not isAlive and not get_node("AnimationPlayer").is_playing()):
-		queue_free()
+		get_parent().queue_respawn(self)
+		return
 	
 	if (grounded):
 		grounded_timer -= delta
@@ -298,6 +302,10 @@ func ink_splash(): # Generates an ink splash where player stands
 	splash.set_position(self.position)
 	splash.setup(color, abs(scale.y))
 	get_parent().add_child(splash)
+	var ink = get_node("Ink").duplicate()
+	ink.set_position(get_node("Ink").to_global(ink.get_position()))
+	get_parent().add_child(ink)
+	ink.set_emitting(true)
 
 func acquire_powerup(p):
 	if (powerup != null):
@@ -328,6 +336,11 @@ func net(): # Catched by a Net thrown by another player
 
 func _ready():
 	splash_scene = load("res://Stages/mon/splash/Splash.tscn")
+	get_node("AnimationPlayer").play("RESET")
+	get_node("PowerupEffects/PowerupAnimations").play("RESET")
+	facing_left = false
+	prev_facing_left = false
+	set_scale(Vector2(1,1))
 	set_physics_process(true)
 
 func set_color(color_string):

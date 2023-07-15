@@ -22,6 +22,7 @@ func on_collision(player1, player2):
 	var tagged = player1
 	if (tagged == mon):
 		tagged = player2
+	mon.disconnect("on_death", self, "on_death")
 	mon.disconnect("player_collision", self, "on_collision")
 	var powerup_animations = get_parent().get_node("PowerupAnimations")
 	if (powerup_animations.get_current_animation() == "BombermonAcquire"):
@@ -33,6 +34,7 @@ func on_collision(player1, player2):
 
 func tag_player(player, time_left):
 	mon = player
+	mon.connect("on_death", self, "on_death")
 	mon.connect("player_collision", self, "on_collision")
 	mon.get_node("PowerupEffects").get_node("PowerupAnimations").play("BombermonAcquire")
 	display_overhead_icon(true)
@@ -43,14 +45,16 @@ func effect(player):
 	tag_player(player, timer_duration)
 
 func effect_finish():
+	mon.disconnect("on_death", self, "on_death")
+	mon.disconnect("player_collision", self, "on_collision")
 	var bodies = get_node("Area2D").get_overlapping_bodies()
-	set_process(false)
 	display_overhead_icon(false)
 	for body in bodies:
 		if (body.is_in_group("players") and body != mon):
 			body.killed_by_player(mon)
 	mon.die()
 	get_parent().get_node("PowerupAnimations").play("Bombermon")
+	get_node("DurationTimer").stop()
 
 func _process(delta):
 	if (!get_node("DurationTimer").is_stopped()):
@@ -59,6 +63,13 @@ func _process(delta):
 		get_node("OverheadIcon/FuseSparks").set_position(spark_positions[5-time_left])
 		if (get_node("OverheadIcon").is_flipped_h()):
 			get_node("OverheadIcon/FuseSparks").position.x *= -1
+
+func on_death(mon):
+	get_node("DurationTimer").stop()
+	get_parent().get_parent().disconnect("on_death", self, "on_death")
+	get_parent().get_parent().disconnect("player_collision", self, "on_collision")
+	display_overhead_icon(false)
+	get_parent().get_parent().remove_powerup()
 
 func _ready():
 	get_parent().get_parent().connect("turn_left", self, "flip_h")

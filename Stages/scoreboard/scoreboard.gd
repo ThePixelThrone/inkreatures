@@ -23,6 +23,9 @@ func _ready():
 		if player.score == 2:
 			get_node(node_name).set_modulate(get_node("B3").get_modulate())
 			get_node("B3/Spotlight"+var2str(player.number)).set_visible(true)
+		elif player.score == 3:
+			get_tree().change_scene("res://Stages/scoreboard/Winner.tscn")
+			return
 	# Remove unused players
 	for p in not_playing:
 		get_node("player"+var2str(p)).queue_free()
